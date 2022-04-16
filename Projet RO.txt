@@ -1,0 +1,28 @@
+19 Communes
+3 Camions
+0.7 €/habitant
+171 chemins
+
+Minimiser:
+Distance
+Risque = Distance * Montant 
+
+Contrainte: (à intégrer à la fin)
+Pas plus de 50% pour un camion
+Un camion peut pas faire les 3 communes les plus peuplées
+
+Une solution
+Trois séquences de n° de communes 
+avec comme contrainte qu'une commune ne peut apparaitre qu'une fois au total
+[1,5,4,9..]
+[3,8,7]
+[]
+
+Distance  = Somme des distances entres les communes
+Risque = Somme ( Distance * Somme ( Argent déjà récolté ) )
+
+
+Input : 
+Distances de x à y
+Population de x
+
