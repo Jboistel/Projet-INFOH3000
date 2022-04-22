@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7f5d0ec-b9c8-4d99-8d60-02661cfc5a0c" name="Default Changelist" comment="Test de modification">
-      <change beforePath="$PROJECT_DIR$/.idea/Projet-INFOH3000.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Projet-INFOH3000.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Generation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Generation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Town.py" beforeDir="false" afterPath="$PROJECT_DIR$/Town.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Truck.py" beforeDir="false" afterPath="$PROJECT_DIR$/Truck.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Generation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Town.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Town.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Truck.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Truck.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
     "WebServerToolWindowFactoryState": "false",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "settings.editor.selected.configurable": "actions.on.save"
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable"
   }
 }]]></component>
   <component name="RunManager">
@@ -76,7 +75,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\jbois\PycharmProjects\projet-INFOH3000\src\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -97,7 +96,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1650116035469</updated>
-      <workItem from="1650621379230" duration="1852000" />
+      <workItem from="1650621379230" duration="3126000" />
     </task>
     <task id="LOCAL-00001" summary="Test de modification">
       <created>1650116361764</created>
