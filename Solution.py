@@ -1,10 +1,15 @@
+import Truck
+
+
 class Solution:
+    trucks: [Truck]
+    score: int
+
     def __init__(self, truckA, truckB, truckC):
-        self.truckA = truckA
-        self.truckB = truckB
-        self.truckC = truckC
+        self.trucks.append(truckA)
+        self.trucks.append(truckB)
+        self.trucks.append(truckC)
 
     def calculateScore(self):
-        score = 0
-        #TODO
-        return score
+        # TODO
+        return self.score
