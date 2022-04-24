@@ -1,8 +1,9 @@
 class Town:
     name: str
     population: int
+    distancesToOthers = {}
 
-    def __init__(self, name, population):
+    def __init__(self, name: str, population: int):
         self.name = name
         self.population = population
 
@@ -14,3 +15,6 @@ class Town:
 
     def getCashAmount(self):
         return self.population * 0.7  # 0.7 is the tax/habitant
+
+    def getDistanceToTown(self, other):
+        return self.distancesToOthers[other]
