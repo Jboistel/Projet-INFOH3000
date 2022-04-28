@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7f5d0ec-b9c8-4d99-8d60-02661cfc5a0c" name="Default Changelist" comment="Test de modification">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Projet-INFOH3000.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Projet-INFOH3000.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Town.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Town.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Truck.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Truck.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/matrix.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/matrix.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +90,7 @@
       <updated>1650116035469</updated>
       <workItem from="1650621379230" duration="3126000" />
       <workItem from="1650986596295" duration="2063000" />
-      <workItem from="1651158067705" duration="1233000" />
+      <workItem from="1651158067705" duration="6501000" />
     </task>
     <task id="LOCAL-00001" summary="Test de modification">
       <created>1650116361764</created>
@@ -137,6 +130,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/projet_INFOH3000$pythonscript.coverage" NAME="pythonscript Coverage Results" MODIFIED="1650210540473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/projet_INFOH3000$main__1_.coverage" NAME="main Coverage Results" MODIFIED="1650624796339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/projet_INFOH3000$main.coverage" NAME="main Coverage Results" MODIFIED="1650814721126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/projet_INFOH3000$main.coverage" NAME="main Coverage Results" MODIFIED="1651178802057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
