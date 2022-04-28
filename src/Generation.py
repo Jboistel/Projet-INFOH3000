@@ -11,7 +11,6 @@ class Generation:
         newSolutions = []
         for i, solution in enumerate(self.solutions):
 
-
     def mutate(self):
 
     def selection(self):
