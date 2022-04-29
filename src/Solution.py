@@ -1,4 +1,6 @@
-import Truck
+from copy import deepcopy
+
+from Truck import *
 
 
 class Solution:
@@ -6,11 +8,11 @@ class Solution:
     totalDist: int
     totalRisque: int
     score: int
+    code: []
 
-    def __init__(self, truckA, truckB, truckC):
-        self.trucks.append(truckA)
-        self.trucks.append(truckB)
-        self.trucks.append(truckC)
+    def __init__(self, code):
+        self.code = code
+        self.decode(code)
 
     def calculateDistance(self):
         self.totalDist = 0
@@ -39,3 +41,17 @@ class Solution:
                 else:
                     towns.append(town)
         return True
+
+    def decode(self, code: [int]):
+        codeCopy = deepcopy(code)
+        sortedCode = []
+        start = codeCopy.index(0)
+        while len(codeCopy) > start:
+            sortedCode.append(codeCopy.pop(start))
+        for i in range(len(codeCopy)):
+            sortedCode.append(codeCopy.pop(0))
+        for i in range(3):
+            route = [sortedCode.pop(0)]
+            while sortedCode[0] != 0:
+                route.append(sortedCode.pop(0))
+            self.trucks.append(Truck(route))

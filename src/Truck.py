@@ -1,5 +1,6 @@
 import Town
 
+
 class Truck:
     route: [Town]
     amount: int
@@ -21,14 +22,14 @@ class Truck:
 
     def getDistance(self):
         result = 0
-        for i in range(len(self.route)-1):  # [a,b,c]
-            result += self.route[i].getDistanceToTown(self.route[i+1])
+        for i in range(len(self.route) - 1):  # [a,b,c]
+            result += self.route[i].getDistanceToTown(self.route[i + 1])
         return result
 
     def getRisque(self):
         amount = 0
         result = 0
-        for i in range(len(self.route)-1):
+        for i in range(len(self.route) - 1):
             amount += self.route[i].getCashAmount
-            result += amount * self.route[i].getDistanceToTown(self.route[i+1])
+            result += amount * self.route[i].getDistanceToTown(self.route[i + 1])
         return result
