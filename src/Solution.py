@@ -1,3 +1,4 @@
+from Data import Data
 from copy import deepcopy
 
 from Truck import *
@@ -8,7 +9,8 @@ class Solution:
     totalDist: int
     totalRisque: int
     score: int
-    code: []
+    code: [] #somme des routes ?
+    data = Data()
 
     def __init__(self, code):
         self.code = code
@@ -36,14 +38,25 @@ class Solution:
         self.score = min(scores)
         return self.score
 
-    def checkValidity(self) -> bool:  # La première et la dernière risquent d'être la banque
+    def checkDuplicates(self) -> bool:  # La première et la dernière risquent d'être la banque
         towns = []
         for truck in self.trucks:
             for town in truck.getRoute():
-                if town in towns:
-                    return False
+                if (town in towns) and (town.getName() != "bank"):
+                    return True
                 else:
                     towns.append(town)
+        return False
+
+    def checkValidity(self) -> bool:
+        for truck in self.trucks:
+            truckRoute = truck.getRoute()
+            if (((1 in truckRoute) and (4 in truckRoute)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
+                    or ((1 in truckRoute) and (15 in truckRoute))
+                    or ((4 in truckRoute) and (15 in truckRoute))):
+                return False
+            if truck.getAmount() > sum(self.data.getNbPeople())/2: #vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
+                return False
         return True
 
     def decode(self, code: [int]):
@@ -59,3 +72,6 @@ class Solution:
             while sortedCode[0] != 0:
                 route.append(sortedCode.pop(0))
             self.trucks.append(Truck(route))
+
+    def getCode(self):
+        return self.code
