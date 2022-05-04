@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7f5d0ec-b9c8-4d99-8d60-02661cfc5a0c" name="Default Changelist" comment="">
+    <list default="true" id="d7f5d0ec-b9c8-4d99-8d60-02661cfc5a0c" name="Default Changelist" comment="Test de modification">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Projet-INFOH3000.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Projet-INFOH3000.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Truck.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Truck.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,11 +16,6 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -33,10 +27,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DefiROGenetique" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jbois\PycharmProjects\Projet-INFOH3000" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -68,9 +69,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\jbois\AppData\Local\Programs\Python\Python39\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -84,7 +85,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -96,6 +97,11 @@
       <option name="presentableId" value="Default" />
       <updated>1650116035469</updated>
       <workItem from="1650621379230" duration="3126000" />
+      <workItem from="1650966141070" duration="134000" />
+      <workItem from="1650968277953" duration="2473000" />
+      <workItem from="1651335003658" duration="4749000" />
+      <workItem from="1651607752351" duration="679000" />
+      <workItem from="1651649392020" duration="336000" />
     </task>
     <task id="LOCAL-00001" summary="Test de modification">
       <created>1650116361764</created>
@@ -111,14 +117,7 @@
       <option name="project" value="LOCAL" />
       <updated>1650116457155</updated>
     </task>
-    <task id="LOCAL-00003" summary="Méthodes de base dans Generation.py&#10;Calcul Risque Score et Validité dans Solution.py&#10;Ajout des distances dans les villes&#10;Ajout des distances parcourues et du risque prit pour les camions">
-      <created>1650806830305</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1650806830305</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,7 +129,17 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="COLUMN_ORDER" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
             </State>
           </value>
         </entry>
@@ -139,51 +148,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Test de modification" />
-    <MESSAGE value="Méthodes de base dans Generation.py&#10;Calcul Risque Score et Validité dans Solution.py&#10;Ajout des distances dans les villes&#10;Ajout des distances parcourues et du risque prit pour les camions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Méthodes de base dans Generation.py&#10;Calcul Risque Score et Validité dans Solution.py&#10;Ajout des distances dans les villes&#10;Ajout des distances parcourues et du risque prit pour les camions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test de modification" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1650803281058">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1650803281058" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1650806829037">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1650806829037" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1650805250840">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1650805250840" />
-    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1651223619588">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1651223619588" />
-    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1651223619588">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1651223619588" />
-    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1651223619588">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1651223619588" />
-    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1651223619588">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1651223619588" />
-    <state x="369" y="110" key="SettingsEditor" timestamp="1650881136269">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="369" y="110" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1650881136269" />
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1650803049407" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1650806841732">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1650806841732" />
-    <state x="581" y="298" key="com.intellij.ide.util.TipDialog" timestamp="1651221197154">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1650881108234" />
-    <state x="581" y="298" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1651221197154" />
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Projet_INFOH3000$main.coverage" NAME="main Coverage Results" MODIFIED="1650966206329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
