@@ -3,13 +3,11 @@ import Solution
 import matplotlib.pyplot as plt
 from numpy.random import randint
 
-global distances
-distances = {}
 
 solutions: Solution
 
 
-def plot():
+def plot(solutions: Solution):
     distances: float
     risques: float
     for solution in solutions:
@@ -24,7 +22,7 @@ def plot():
 def main():
     data = Data()
     print(data.getDistMatrix())
-    plot()
+    #plot(solutions)
 
     list = [3, 0, 5, 6, 0, 1, 2, 4]
     print(list[-len(list)])
