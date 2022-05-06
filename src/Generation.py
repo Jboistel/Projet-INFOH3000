@@ -6,7 +6,7 @@ from Solution import *
 
 
 class Generation:
-    solutions: [Solution]
+    solutions: [Solution] = []
     data = Data()
     distMatrix = data.getDistMatrix()
 
@@ -60,3 +60,6 @@ class Generation:
     def selection(self):
         self.solutions.sort(key=lambda s: s.calculateScore())
         self.solutions = self.solutions[:len(self.solutions) / 2]
+
+    def getSolutions(self) -> solutions:
+        return self.solutions

@@ -17,6 +17,12 @@ class Truck:
     def getRoute(self) -> [Town]:
         return self.route
 
+    def getRouteIds(self) -> [int]:
+        route = []
+        for town in self.route:
+            route.append(town.getId())
+        return route
+
     def increaseAmount(self, town: Town):
         self.amount += town.getCashAmount()
 
@@ -30,6 +36,6 @@ class Truck:
         amount = 0
         result = 0
         for i in range(len(self.route) - 1):
-            amount += self.route[i].getCashAmount
+            amount += self.route[i].getCashAmount()
             result += amount * self.route[i].getDistanceToTown(self.route[i + 1])
         return result

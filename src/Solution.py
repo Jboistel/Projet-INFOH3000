@@ -1,7 +1,8 @@
 from Data import Data
+from Town import Town
 from copy import deepcopy
 
-from Truck import *
+from Truck import Truck
 
 
 class Solution:
@@ -49,24 +50,35 @@ class Solution:
         return False
 
     def checkValidity(self) -> bool:
+        """
         for truck in self.trucks:
-            truckRouteId = truck.getRoute().getId()
-            if (((1 in truckRouteId) and (4 in truckRouteId)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
-                    or ((1 in truckRouteId) and (15 in truckRouteId))
-                    or ((4 in truckRouteId) and (15 in truckRouteId))):
+            truckRouteIds = truck.getRouteIds()
+            if (((1 in truckRouteIds) and (4 in truckRouteIds)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
+                    or ((1 in truckRouteIds) and (15 in truckRouteIds))
+                    or ((4 in truckRouteIds) and (15 in truckRouteIds))):
                 return False
             if truck.getAmount() > sum(self.data.getNbPeople())/2: #vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
                 return False
+        """
         return True
 
     def decode(self, code: [int]):
+        route = []
         codeCopy = deepcopy(code)
         for i in range(3):
-            route = [codeCopy.pop(0)]
-            while (len(codeCopy) != 0) and codeCopy[0] != 0:
-                route.append(codeCopy.pop(0))
-            if (route[0] != 0): route.insert(0,0)
-            if (route[-1] != 0): route.append(0)
+            if len(codeCopy) != 0:
+                routeIds = [codeCopy.pop(0)]
+                while (len(codeCopy) != 0) and codeCopy[0] != 0:
+                    routeIds.append(codeCopy.pop(0))
+                if routeIds[0] != 0:        #on ajoute 0 au début de la liste
+                    routeIds.insert(0, 0)
+                if routeIds[-1] != 0:       #on ajoute 0 à la fin de la liste
+                    routeIds.append(0)
+
+                for townId in routeIds:
+                    route.append(Town(townId))
+            else:
+                route = [Town(0), Town(0)]
             self.trucks.append(Truck(route))
 
     """
