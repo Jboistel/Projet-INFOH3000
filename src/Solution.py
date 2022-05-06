@@ -7,15 +7,19 @@ from Truck import Truck
 
 class Solution:
     trucks: [Truck] = []
-    totalDist: int
-    totalRisque: int
-    score: int
-    code: [] #somme des routes ?
+    totalDist: int = 0
+    totalRisque: int = 0
+    score: int = 0
+    code: []  # somme des routes ?
     data = Data()
 
     def __init__(self, code):
+        self.trucks = []
         self.code = code
         self.decode(code)
+        self.calculateRisque()
+        self.calculateDistance()
+        self.calculateScore()
 
     def calculateDistance(self) -> int:
         self.totalDist = 0
@@ -31,9 +35,9 @@ class Solution:
     La methode donne plusieurs poids au risque et à la distance totale et renvoie le score minimal
     """
 
-    def calculateScore(self, weight: [int]) -> int:  # [0.3, 0.5, 0.7]
+    def calculateScore(self, weights: [int] = [0.3, 0.5, 0.7]) -> int:  #
         scores = []
-        for value in weight:
+        for value in weights:
             scores.append(
                 self.totalRisque * value + self.totalDist * (1 - value))  # TODO: Attention aux ordres de grandeur
         self.score = min(scores)
@@ -70,9 +74,9 @@ class Solution:
                 routeIds = [codeCopy.pop(0)]
                 while (len(codeCopy) != 0) and codeCopy[0] != 0:
                     routeIds.append(codeCopy.pop(0))
-                if routeIds[0] != 0:        #on ajoute 0 au début de la liste
+                if routeIds[0] != 0:  # on ajoute 0 au début de la liste
                     routeIds.insert(0, 0)
-                if routeIds[-1] != 0:       #on ajoute 0 à la fin de la liste
+                if routeIds[-1] != 0:  # on ajoute 0 à la fin de la liste
                     routeIds.append(0)
 
                 for townId in routeIds:

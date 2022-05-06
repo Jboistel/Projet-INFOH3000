@@ -5,7 +5,6 @@ from Generation import Generation
 import matplotlib.pyplot as plt
 import random
 
-
 solutions: [Solution] = []
 global code
 code = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
@@ -26,7 +25,7 @@ def plot(sols: [Solution]):
 def generateSolution():
     codeCopy = deepcopy(code)
     random.shuffle(codeCopy)
-    #print(code)
+    # print(code)
     sol = Solution(codeCopy)
 
     if not sol.checkValidity():
@@ -45,43 +44,24 @@ def algo(nbSolInit: int, nbIterations: int):
 
     for i in range(nbSolInit):  # on génère un premier échantillon de 20 solutions au hasard
         solutions.append(generateSolution())
-        #print(solutions[i].code) # debug
+        # print(solutions[i].code) # debug
 
     gen = Generation(solutions)
 
-    """"
     for i in range(nbIterations):
         gen.selection()
         gen.reproduce()
         gen.mutate()
         # plot(gen.getSolutions())
-    """
 
 
 def main():
     data = Data()
-    algo(nbSolInit=20, nbIterations= 50)
-    print(len(solutions))
+    algo(nbSolInit=100, nbIterations=100)
+    # print(len(solutions))
     plot(solutions)
-    #for solution in solutions:
-     #   print(solution.code)
-
-
-    """
-    list = [3, 0, 5, 6, 0, 1, 2, 4]
-    print(list[-len(list)])
-    new = []
-    current = list[randint(len(list))]
-    print("Start: ", current)
-    new.append(current)
-    while len(list) > 1:
-        dx = list[-len(list) + list.index(current) + 1]
-        print(dx)
-        list.pop(list.index(current))
-        current = dx
-        new.append(current)
-        print(new)
-"""
+    # for solution in solutions:
+    #    print(solution)
 
 
 if __name__ == "__main__":
