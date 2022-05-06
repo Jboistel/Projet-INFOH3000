@@ -22,17 +22,13 @@ class Data:
         [7.1, 8.8, 2.9, 12.0, 7.9, 4.0, 6.5, 10.3, 11.9, 5.9, 11.2, 9.5, 8.9, 8.0, 5.7, 6.6, 11.3, 5.5, 1.5, 0],
     ]
 
-    nbPeople = [117412, 33161, 24224, 178552, 47180, 39556, 55613, 24269, 85541, 51426, 21638, 96586, 50659, 27402,
+    nbPeople = [0, 117412, 33161, 24224, 178552, 47180, 39556, 55613, 24269, 85541, 51426, 21638, 96586, 50659, 27402,
                 132560, 81944, 24619, 54311, 41207]
 
-    names = ["bank", "anderlecht", "auderghem", "berchem_Sainte_Agathe", "bruxelles_ville", "etterbeek", "evere",
-             "forest", "ganshoren", "ixelles", "jette", "keokelberg", "molenbeek_Saint_Jean", "saint_Gilles",
-             "saint_Josse_ten_Noode", "schaerbeek", "uccle", "watermael_Boitsfort", "woluwe_Saint_Lambert",
-             "woluwe_Saint_Pierre"]
-
-
-
-
+    townsNames = ['bank', 'anderlecht', 'auderghem', 'berchem_Sainte_Agathe', 'bruxelles_ville', 'etterbeek', 'evere',
+             'forest', 'ganshoren', 'ixelles', 'jette', 'koekelberg', 'molenbeek_Saint_Jean', 'saint_Gilles',
+             'saint_Josse_ten_Noode', 'schaerbeek', 'uccle', 'watermael_Boitsfort', 'woluwe_Saint_Lambert',
+             'woluwe_Saint_Pierre']
 
     def getDistMatrix(self):
         return self.distMatrix
@@ -40,8 +36,14 @@ class Data:
     def getNbPeople(self):
         return self.nbPeople
 
+    def getTownPop(self, id: int):
+        return self.nbPeople[id]
+
     def getDist(self, column: int, row: int):
         return self.distMatrix[column][row]
+
+    def getTownName(self, id: int):
+        return self.townsNames[id]
 
 
 bank = [0, 4.1, 9.0, 6.0, 1.5, 4.7, 4.8, 7.3, 6.0, 3.3, 4.9, 3.6, 2.6, 5.1, 1.2, 2.5, 8.3, 10.5, 6.1, 7.1]
