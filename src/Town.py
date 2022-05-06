@@ -6,7 +6,7 @@ class Town:
     population: int
     distancesToOthers = {}
 
-    def __init__(self, name: str, population: int):
+    def __init__(self, name: str, population: int, distances: [float]):
         self.name = name
         self.population = population
 

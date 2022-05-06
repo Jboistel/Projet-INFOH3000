@@ -71,6 +71,7 @@ class Solution:
             route = [sortedCode.pop(0)]
             while sortedCode[0] != 0:
                 route.append(sortedCode.pop(0))
+            route.append(0)
             self.trucks.append(Truck(route))
 
     def getCode(self):

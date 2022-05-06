@@ -25,6 +25,15 @@ class Data:
     nbPeople = [117412, 33161, 24224, 178552, 47180, 39556, 55613, 24269, 85541, 51426, 21638, 96586, 50659, 27402,
                 132560, 81944, 24619, 54311, 41207]
 
+    names = ["bank", "anderlecht", "auderghem", "berchem_Sainte_Agathe", "bruxelles_ville", "etterbeek", "evere",
+             "forest", "ganshoren", "ixelles", "jette", "keokelberg", "molenbeek_Saint_Jean", "saint_Gilles",
+             "saint_Josse_ten_Noode", "schaerbeek", "uccle", "watermael_Boitsfort", "woluwe_Saint_Lambert",
+             "woluwe_Saint_Pierre"]
+
+
+
+
+
     def getDistMatrix(self):
         return self.distMatrix
 
