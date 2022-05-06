@@ -1,3 +1,4 @@
+from copy import deepcopy
 from Data import Data
 from Solution import Solution
 from Generation import Generation
@@ -23,9 +24,10 @@ def plot(sols: [Solution]):
 
 
 def generateSolution():
-    random.shuffle(code)
+    codeCopy = deepcopy(code)
+    random.shuffle(codeCopy)
     #print(code)
-    sol = Solution(code)
+    sol = Solution(codeCopy)
 
     if not sol.checkValidity():
         generateSolution()
@@ -60,9 +62,9 @@ def main():
     data = Data()
     algo(nbSolInit=20, nbIterations= 50)
     print(len(solutions))
-    #plot(solutions)
-    for solution in solutions:
-        print(solution.code)
+    plot(solutions)
+    #for solution in solutions:
+     #   print(solution.code)
 
 
     """
