@@ -5,7 +5,7 @@ from Truck import *
 
 
 class Solution:
-    trucks: [Truck]
+    trucks: [Truck] = []
     totalDist: int
     totalRisque: int
     score: int
@@ -50,15 +50,26 @@ class Solution:
 
     def checkValidity(self) -> bool:
         for truck in self.trucks:
-            truckRoute = truck.getRoute()
-            if (((1 in truckRoute) and (4 in truckRoute)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
-                    or ((1 in truckRoute) and (15 in truckRoute))
-                    or ((4 in truckRoute) and (15 in truckRoute))):
+            truckRouteId = truck.getRoute().getId()
+            if (((1 in truckRouteId) and (4 in truckRouteId)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
+                    or ((1 in truckRouteId) and (15 in truckRouteId))
+                    or ((4 in truckRouteId) and (15 in truckRouteId))):
                 return False
             if truck.getAmount() > sum(self.data.getNbPeople())/2: #vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
                 return False
         return True
 
+    def decode(self, code: [int]):
+        codeCopy = deepcopy(code)
+        for i in range(3):
+            route = [codeCopy.pop(0)]
+            while (len(codeCopy) != 0) and codeCopy[0] != 0:
+                route.append(codeCopy.pop(0))
+            if (route[0] != 0): route.insert(0,0)
+            if (route[-1] != 0): route.append(0)
+            self.trucks.append(Truck(route))
+
+    """
     def decode(self, code: [int]):
         codeCopy = deepcopy(code)
         sortedCode = []
@@ -72,6 +83,7 @@ class Solution:
             while sortedCode[0] != 0:
                 route.append(sortedCode.pop(0))
             self.trucks.append(Truck(route))
+    """
 
     def getCode(self):
         return self.code
