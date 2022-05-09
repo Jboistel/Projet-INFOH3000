@@ -20,7 +20,7 @@ class Generation:
             if i != len(self.solutions) and i % 2 == 1:
                 newSolutions.append(self.getChild(i - 1, i, True))
                 newSolutions.append(self.getChild(i - 1, i, False))
-        return Generation(newSolutions)
+        self.solutions += newSolutions
 
     # Source : https://github.com/ralthor/GeneticAlgorithm-TSP/blob/feature-multi-tsp/src/algorithm.js
     def getChild(self, x, y, forward):
