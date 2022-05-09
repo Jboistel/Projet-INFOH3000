@@ -12,7 +12,7 @@ global code
 code = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
 
 
-def plot(sols: [Solution]):
+def plot(sols: [Solution], it):
     distances: [float] = []
     risques: [float] = []
     for solution in sols:
@@ -20,12 +20,14 @@ def plot(sols: [Solution]):
         risques.append(solution.calculateRisque())
     plt.ylabel("Distance")
     plt.xlabel("Risque")
+    plt.title("Solution " + it)
     plt.scatter(distances, risques)
     plt.show()
 
 
 def generateSolution():
-    codeCopy = deepcopy(code)
+    # codeCopy = deepcopy(code)
+    codeCopy = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
     random.shuffle(codeCopy)
     # print(code)
     sol = Solution(codeCopy)
@@ -51,23 +53,27 @@ def algo(nbSolInit: int, nbIterations: int):
 
     gen = Generation(solutions)
 
+    gen_list = []
     for i in range(nbIterations):
-
+        gen_list.append(gen)
         gen.selection()
-        gen.reproduce()
+        gen = gen.reproduce()
         gen.mutate()
-        solutions = gen.getSolutions()
-        # plot(gen.getSolutions())
-        if i % 200 == 0:
-            plot(solutions)
+        print(len(gen_list))
+        if gen in gen_list:
+            print("Deux fois le même id")
+            break
 
+    for gen in gen_list:
+        plot(gen.getSolutions())
+    # plot(gen.getSolutions())
 
 
 def main():
     data = Data()
-    algo(nbSolInit=100, nbIterations=100)
+    algo(nbSolInit=100, nbIterations=10)
     # print(len(solutions))
-    #plot(solutions)
+    plot(solutions)
     # for solution in solutions:
     #    print(solution)
 

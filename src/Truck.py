@@ -7,6 +7,7 @@ class Truck:
 
     def __init__(self, route: [Town]):
         self.route = route
+        self.amount = 0
 
     def getAmount(self) -> float:
         self.amount = 0
@@ -28,7 +29,7 @@ class Truck:
 
     def getDistance(self) -> int:
         result = 0
-        for i in range(len(self.route) - 1):  # [a,b,c]
+        for i in range(len(self.route) - 1):
             result += self.route[i].getDistanceToTown(self.route[i + 1])
         return result
 
@@ -38,4 +39,5 @@ class Truck:
         for i in range(len(self.route) - 1):
             amount += self.route[i].getCashAmount()
             result += amount * self.route[i].getDistanceToTown(self.route[i + 1])
+            self.increaseAmount(self.route[i])
         return result

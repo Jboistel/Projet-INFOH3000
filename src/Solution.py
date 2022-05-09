@@ -14,8 +14,8 @@ class Solution:
     data = Data()
 
     def __init__(self, code):
-        self.trucks = []
         self.code = code
+        self.trucks = []
         self.decode(code)
         self.calculateRisque()
         self.calculateDistance()
