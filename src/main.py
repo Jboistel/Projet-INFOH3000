@@ -20,7 +20,7 @@ def plot(sols: [Solution], it):
         risques.append(solution.calculateRisque())
     plt.ylabel("Distance")
     plt.xlabel("Risque")
-    plt.title("Solution " + it)
+    plt.title("Solution " + str(it))
     plt.scatter(distances, risques)
     plt.show()
 
@@ -63,17 +63,16 @@ def algo(nbSolInit: int, nbIterations: int):
         if gen in gen_list:
             print("Deux fois le même id")
             break
-
-    for gen in gen_list:
-        plot(gen.getSolutions())
+    plot(gen_list[0].getSolutions(), "start")
+    plot(gen_list[-1].getSolutions(), "end")
     # plot(gen.getSolutions())
 
 
 def main():
     data = Data()
-    algo(nbSolInit=100, nbIterations=10)
+    algo(nbSolInit=200, nbIterations=100)
     # print(len(solutions))
-    plot(solutions)
+    #plot(solutions)
     # for solution in solutions:
     #    print(solution)
 

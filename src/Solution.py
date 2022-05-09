@@ -35,7 +35,9 @@ class Solution:
     La methode donne plusieurs poids au risque et à la distance totale et renvoie le score minimal
     """
 
-    def calculateScore(self, weights: [int] = [0.3, 0.5, 0.7]) -> int:  #
+    def calculateScore(self, weights=None) -> int:  #
+        if weights is None:
+            weights = [0.3, 0.5, 0.7]
         scores = []
         for value in weights:
             scores.append(
@@ -53,7 +55,7 @@ class Solution:
                     towns.append(town)
         return False
 
-    def checkValidity(self) -> bool:
+    def checkValidity(self) -> bool:  # TODO
         """
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
@@ -84,23 +86,6 @@ class Solution:
             else:
                 route = [Town(0), Town(0)]
             self.trucks.append(Truck(route))
-
-    """
-    def decode(self, code: [int]):
-        codeCopy = deepcopy(code)
-        sortedCode = []
-        start = codeCopy.index(0)
-        while len(codeCopy) > start:
-            sortedCode.append(codeCopy.pop(start))
-        for i in range(len(codeCopy)):
-            sortedCode.append(codeCopy.pop(0))
-        for i in range(3):
-            route = [sortedCode.pop(0)]
-            while sortedCode[0] != 0:
-                route.append(sortedCode.pop(0))
-            route.append(0)
-            self.trucks.append(Truck(route))
-    """
 
     def getCode(self):
         return self.code

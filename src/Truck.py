@@ -1,4 +1,4 @@
-import Town
+from Town import Town
 
 
 class Truck:
@@ -9,29 +9,32 @@ class Truck:
         self.route = route
         self.amount = 0
 
+    """
     def getAmount(self) -> float:
         self.amount = 0
         for town in self.route:
             self.amount += town.getCashAmount()
         return self.amount
+    """
 
     def getRoute(self) -> [Town]:
         return self.route
 
     def getRouteIds(self) -> [int]:
-        route = []
-        for town in self.route:
-            route.append(town.getId())
-        return route
-
-    def increaseAmount(self, town: Town):
-        self.amount += town.getCashAmount()
+        return [town.getId() for town in self.route]
 
     def getDistance(self) -> int:
         result = 0
         for i in range(len(self.route) - 1):
             result += self.route[i].getDistanceToTown(self.route[i + 1])
+        result += self.route[-1].getDistanceToTown(self.route[0])
         return result
+
+    def getAmount(self) -> float:
+        return self.amount
+
+    def increaseAmount(self, town: Town):
+        self.amount += town.getCashAmount()
 
     def getRisque(self) -> float:
         amount = 0
@@ -40,4 +43,65 @@ class Truck:
             amount += self.route[i].getCashAmount()
             result += amount * self.route[i].getDistanceToTown(self.route[i + 1])
             self.increaseAmount(self.route[i])
+        amount += self.route[-1].getCashAmount()
+        result += amount * self.route[-1].getDistanceToTown(self.route[0])
         return result
+
+
+def testRoute():
+    from random import shuffle
+    from copy import deepcopy
+    routeSrc = [Town(i) for i in range(20)]
+    shuffle(routeSrc)
+    truck = Truck(deepcopy(routeSrc))
+    for i in range(len(routeSrc)):
+        assert truck.getRoute()[i].getName() == routeSrc[i].getName()
+    print("Route test passed")
+
+
+def testAmount():
+    from random import randint
+    routeSrc = [Town(randint(0, 19)) for _ in range(5)]
+    truck = Truck(routeSrc)
+    totalExpected = 0
+    for i in truck.getRoute():
+        assert truck.getAmount() == totalExpected
+        truck.increaseAmount(i)
+        totalExpected += i.getCashAmount()
+    assert totalExpected == truck.getAmount()
+    print("Amount test passed")
+
+
+def testDistance():
+    from random import randint
+    routeSrc = [Town(randint(0, 19)) for _ in range(5)]
+    truck = Truck(routeSrc)
+    expectedDist = routeSrc[0].getDistanceToTown(routeSrc[1]) + \
+                   routeSrc[1].getDistanceToTown(routeSrc[2]) + \
+                   routeSrc[2].getDistanceToTown(routeSrc[3]) + \
+                   routeSrc[3].getDistanceToTown(routeSrc[4]) + \
+                   routeSrc[4].getDistanceToTown(routeSrc[0])
+    assert expectedDist == truck.getDistance()
+    print("Distance test passed")
+
+
+def testRisque():
+    from random import randint
+    routeSrc = [Town(randint(0, 19)) for _ in range(5)]
+    truck = Truck(routeSrc)
+    expectedRisque = 0
+    expectedAmount = 0
+    for i in range(len(routeSrc)-1):
+        expectedAmount += routeSrc[i].getCashAmount()
+        expectedRisque += routeSrc[i].getDistanceToTown(routeSrc[i+1]) * expectedAmount
+    expectedAmount += routeSrc[-1].getCashAmount()
+    expectedRisque += routeSrc[-1].getDistanceToTown(routeSrc[0]) * expectedAmount
+    assert expectedRisque == truck.getRisque()
+    print("Risque test passed")
+
+
+if __name__ == "__main__":
+    testRoute()
+    testAmount()
+    testDistance()
+    testRisque()
