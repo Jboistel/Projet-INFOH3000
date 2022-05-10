@@ -30,11 +30,21 @@ def generateSolution():
     random.shuffle(codeCopy)
     # print(code)
     sol = Solution(codeCopy)
+    i = 0
 
-    if not sol.checkValidity():
+    while not sol.checkValidity() and i < 10000:
+        random.shuffle(codeCopy)
+        sol = Solution(codeCopy)
+        i += 1
+
+    if sol.checkValidity():
+        return sol
+    else:
+        return
+    """if not sol.checkValidity():
         generateSolution()
     else:
-        return sol
+        return sol"""
 
 
 def algo(nbSolInit: int, nbIterations: int):
@@ -57,12 +67,8 @@ def algo(nbSolInit: int, nbIterations: int):
         gen_list.append(gen)
         gen.selection()
         gen = gen.reproduce()
-        gen.mutate()
-        # print(len(gen_list))
-        if gen in gen_list:
-            print("Deux fois le même id")
-            break
-        print(len(gen.getSolutions()))
+        gen.mutate()  # Mutation à faire dans la reproduction
+        print(len(gen_list))
     plot(gen_list[0].getSolutions(), "start")
     plot(gen_list[-1].getSolutions(), "end")
     plot(getParetoFrontier(gen), "pareto")
@@ -79,7 +85,7 @@ def getParetoFrontier(gen: Generation):
 
 def main():
     data = Data()
-    algo(nbSolInit=100, nbIterations=10)
+    algo(nbSolInit=1000, nbIterations=10)
     # print(len(solutions))
     # plot(solutions)
     # for solution in solutions:

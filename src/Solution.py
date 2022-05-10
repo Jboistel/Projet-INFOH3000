@@ -24,14 +24,14 @@ class Solution:
     def calculateDistance(self) -> float:
         self.totalDist = 0
         for truck in self.trucks:
-            self.totalDist += truck.getDistance()
+            self.totalDist += truck.getDistance() / 200
         return self.totalDist
 
     def getTotalDistance(self) -> float:
         return self.totalDist
 
     def calculateRisk(self) -> int:
-        self.totalRisk = (self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / 100000
+        self.totalRisk = (self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / (100000 * 300)
         return self.totalRisk
 
     def getTotalRisk(self) -> float:
@@ -62,8 +62,6 @@ class Solution:
         return False
 
     def checkValidity(self) -> bool:  # TODO
-
-        """ IL FAUT CHECK SUR LE CODE PAS SUR LES CAMIONS
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
             if (((1 in truckRouteIds) and (4 in truckRouteIds)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
@@ -72,7 +70,7 @@ class Solution:
                 return False
             if truck.getAmount() > sum(self.data.getNbPeople())/2: #vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
                 return False
-        """
+
         return True
 
     def decode(self, code: [int]):
