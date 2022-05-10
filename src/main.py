@@ -58,18 +58,28 @@ def algo(nbSolInit: int, nbIterations: int):
         gen.selection()
         gen = gen.reproduce()
         gen.mutate()
-        print(len(gen_list))
+        # print(len(gen_list))
         if gen in gen_list:
             print("Deux fois le même id")
             break
+        print(len(gen.getSolutions()))
     plot(gen_list[0].getSolutions(), "start")
     plot(gen_list[-1].getSolutions(), "end")
+    plot(getParetoFrontier(gen), "pareto")
     # plot(gen.getSolutions())
+
+
+def getParetoFrontier(gen: Generation):
+    optiSols = []
+    for solution in gen.getSolutions():
+        if (gen.isSolutionOptimal(solution)):
+            optiSols.append(solution)
+    return optiSols
 
 
 def main():
     data = Data()
-    algo(nbSolInit=100, nbIterations=50)
+    algo(nbSolInit=100, nbIterations=10)
     # print(len(solutions))
     # plot(solutions)
     # for solution in solutions:

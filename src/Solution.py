@@ -31,7 +31,7 @@ class Solution:
         return self.totalDist
 
     def calculateRisk(self) -> int:
-        self.totalRisk = self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()
+        self.totalRisk = (self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / 100000
         return self.totalRisk
 
     def getTotalRisk(self) -> float:
@@ -93,6 +93,17 @@ class Solution:
             else:
                 route = [Town(0), Town(0)]
             self.trucks.append(Truck(route))
+
+    """Peut etre utile pour le check validity ?
+    def decode(self, code: [int]):
+        c = deepcopy(code)
+        i = c.index(0)
+        a = c[:i]  # premier camion
+        c = c[i + 1:]
+        i = c.index(0)
+        b = c[:i]  # deuxieme camion
+        c = c[i + 1:]  # troisieme camion
+    """
 
     def getCode(self):
         return self.code
