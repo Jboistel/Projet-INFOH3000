@@ -27,7 +27,6 @@ class Truck:
         result = 0
         for i in range(len(self.route) - 1):
             result += self.route[i].getDistanceToTown(self.route[i + 1])
-        result += self.route[-1].getDistanceToTown(self.route[0])
         return result
 
     def getAmount(self) -> float:
@@ -36,7 +35,7 @@ class Truck:
     def increaseAmount(self, town: Town):
         self.amount += town.getCashAmount()
 
-    def getRisque(self) -> float:
+    def getRisk(self) -> float:
         amount = 0
         result = 0
         for i in range(len(self.route) - 1):
@@ -79,8 +78,7 @@ def testDistance():
     expectedDist = routeSrc[0].getDistanceToTown(routeSrc[1]) + \
                    routeSrc[1].getDistanceToTown(routeSrc[2]) + \
                    routeSrc[2].getDistanceToTown(routeSrc[3]) + \
-                   routeSrc[3].getDistanceToTown(routeSrc[4]) + \
-                   routeSrc[4].getDistanceToTown(routeSrc[0])
+                   routeSrc[3].getDistanceToTown(routeSrc[4])
     assert expectedDist == truck.getDistance()
     print("Distance test passed")
 
@@ -91,12 +89,12 @@ def testRisque():
     truck = Truck(routeSrc)
     expectedRisque = 0
     expectedAmount = 0
-    for i in range(len(routeSrc)-1):
+    for i in range(len(routeSrc) - 1):
         expectedAmount += routeSrc[i].getCashAmount()
-        expectedRisque += routeSrc[i].getDistanceToTown(routeSrc[i+1]) * expectedAmount
+        expectedRisque += routeSrc[i].getDistanceToTown(routeSrc[i + 1]) * expectedAmount
     expectedAmount += routeSrc[-1].getCashAmount()
     expectedRisque += routeSrc[-1].getDistanceToTown(routeSrc[0]) * expectedAmount
-    assert expectedRisque == truck.getRisque()
+    assert expectedRisque == truck.getRisk()
     print("Risque test passed")
 
 

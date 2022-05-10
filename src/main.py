@@ -5,7 +5,6 @@ from Generation import Generation
 import matplotlib.pyplot as plt
 import random
 
-global solutions
 solutions: [Solution] = []
 
 global code
@@ -14,14 +13,14 @@ code = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
 
 def plot(sols: [Solution], it):
     distances: [float] = []
-    risques: [float] = []
+    risks: [float] = []
     for solution in sols:
-        distances.append(solution.calculateDistance())
-        risques.append(solution.calculateRisque())
+        distances.append(solution.getTotalDistance())
+        risks.append(solution.getTotalRisk())
     plt.ylabel("Distance")
     plt.xlabel("Risque")
     plt.title("Solution " + str(it))
-    plt.scatter(distances, risques)
+    plt.scatter(risks, distances)
     plt.show()
 
 
@@ -70,9 +69,9 @@ def algo(nbSolInit: int, nbIterations: int):
 
 def main():
     data = Data()
-    algo(nbSolInit=200, nbIterations=100)
+    algo(nbSolInit=100, nbIterations=50)
     # print(len(solutions))
-    #plot(solutions)
+    # plot(solutions)
     # for solution in solutions:
     #    print(solution)
 

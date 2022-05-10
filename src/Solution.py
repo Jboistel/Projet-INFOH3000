@@ -8,7 +8,7 @@ from Truck import Truck
 class Solution:
     trucks: [Truck] = []
     totalDist: int = 0
-    totalRisque: int = 0
+    totalRisk: int = 0
     score: int = 0
     code: []  # somme des routes ?
     data = Data()
@@ -17,19 +17,25 @@ class Solution:
         self.code = code
         self.trucks = []
         self.decode(code)
-        self.calculateRisque()
+        self.calculateRisk()
         self.calculateDistance()
         self.calculateScore()
 
-    def calculateDistance(self) -> int:
+    def calculateDistance(self) -> float:
         self.totalDist = 0
         for truck in self.trucks:
             self.totalDist += truck.getDistance()
         return self.totalDist
 
-    def calculateRisque(self) -> int:
-        self.totalRisque = self.trucks[0].getRisque() + self.trucks[1].getRisque() + self.trucks[2].getRisque()
-        return self.totalRisque
+    def getTotalDistance(self) -> float:
+        return self.totalDist
+
+    def calculateRisk(self) -> int:
+        self.totalRisk = self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()
+        return self.totalRisk
+
+    def getTotalRisk(self) -> float:
+        return self.totalRisk
 
     """
     La methode donne plusieurs poids au risque et à la distance totale et renvoie le score minimal
@@ -41,7 +47,7 @@ class Solution:
         scores = []
         for value in weights:
             scores.append(
-                self.totalRisque * value + self.totalDist * (1 - value))  # TODO: Attention aux ordres de grandeur
+                self.totalRisk * value + self.totalDist * (1 - value))  # TODO: Attention aux ordres de grandeur
         self.score = min(scores)
         return self.score
 
@@ -56,7 +62,8 @@ class Solution:
         return False
 
     def checkValidity(self) -> bool:  # TODO
-        """
+
+        """ IL FAUT CHECK SUR LE CODE PAS SUR LES CAMIONS
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
             if (((1 in truckRouteIds) and (4 in truckRouteIds)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
@@ -69,14 +76,14 @@ class Solution:
         return True
 
     def decode(self, code: [int]):
-        route = []
         codeCopy = deepcopy(code)
         for i in range(3):
+            route = []
             if len(codeCopy) != 0:
                 routeIds = [codeCopy.pop(0)]
                 while (len(codeCopy) != 0) and codeCopy[0] != 0:
                     routeIds.append(codeCopy.pop(0))
-                if routeIds[0] != 0:  # on ajoute 0 au début de la liste
+                if routeIds[0] != 0 or len(routeIds) == 1:  # on ajoute 0 au début de la liste
                     routeIds.insert(0, 0)
                 if routeIds[-1] != 0:  # on ajoute 0 à la fin de la liste
                     routeIds.append(0)

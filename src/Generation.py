@@ -66,5 +66,12 @@ class Generation:
         self.solutions.sort(key=lambda s: s.calculateScore())
         self.solutions = self.solutions[:len(self.solutions) // 2]
 
-    def getSolutions(self) -> solutions:
+    def isSolutionOptimal(self, optiSol: Solution):
+        for solution in self.solutions:
+            if (solution.getTotalDistance() < optiSol.getTotalDistance()
+                    or solution.getTotalRisk() < optiSol.getTotalRisk()):
+                return False
+        return True
+
+    def getSolutions(self) -> [Solution]:
         return self.solutions
