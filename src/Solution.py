@@ -24,18 +24,19 @@ class Solution:
     def calculateDistance(self) -> float:
         self.totalDist = 0
         for truck in self.trucks:
-            self.totalDist += truck.getDistance() / 200
+            self.totalDist += truck.getDistance()
         return self.totalDist
 
     def getTotalDistance(self) -> float:
-        return self.totalDist
+        return round(self.totalDist, 2)
 
     def calculateRisk(self) -> int:
-        self.totalRisk = (self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / (100000 * 300)
+        self.totalRisk = (self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / (
+            200000)
         return self.totalRisk
 
     def getTotalRisk(self) -> float:
-        return self.totalRisk
+        return round(self.totalRisk, 2)
 
     """
     La methode donne plusieurs poids au risque et à la distance totale et renvoie le score minimal
@@ -43,6 +44,7 @@ class Solution:
 
     def calculateScore(self, weights=None) -> int:  #
         if weights is None:
+            # weights = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
             weights = [0.3, 0.5, 0.7]
         scores = []
         for value in weights:
@@ -64,11 +66,13 @@ class Solution:
     def checkValidity(self) -> bool:  # TODO
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
-            if (((1 in truckRouteIds) and (4 in truckRouteIds)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
+            if (((1 in truckRouteIds) and (
+                    4 in truckRouteIds))  # vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
                     or ((1 in truckRouteIds) and (15 in truckRouteIds))
                     or ((4 in truckRouteIds) and (15 in truckRouteIds))):
                 return False
-            if truck.getAmount() > sum(self.data.getNbPeople())/2: #vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
+            if truck.getAmount() > sum(
+                    self.data.getNbPeople()) / 2:  # vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
                 return False
 
         return True

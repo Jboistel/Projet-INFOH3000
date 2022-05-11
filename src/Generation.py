@@ -19,10 +19,8 @@ class Generation:
         for i, solution in enumerate(self.solutions):
             if i != len(self.solutions) and i % 2 == 1:
                 newSolutions.append(self.getChild(i - 1, i, True))
-                newSolutions.append(self.getChild(i - 1, i, True))
                 newSolutions.append(self.getChild(i - 1, i, False))
-                newSolutions.append(self.getChild(i - 1, i, False))
-        return Generation(newSolutions)
+        self.solutions += newSolutions
 
     # Source : https://github.com/ralthor/GeneticAlgorithm-TSP/blob/feature-multi-tsp/src/algorithm.js
     def getChild(self, x, y, forward):
@@ -53,7 +51,7 @@ class Generation:
     def mutate(self):
         for i, solution in enumerate(self.solutions):
             route = solution.getCode()
-            if random.randint(0, 10) == 1:  # 10% de proba de mutation
+            if random.randint(0, 100) == 1:  # 1% de proba de mutation
                 swapIndexA = random.randint(1, 19)
                 swapIndexB = random.randint(1, 19)
                 route[swapIndexA], route[swapIndexB] = route[swapIndexB], route[

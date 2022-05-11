@@ -1,9 +1,9 @@
-from copy import deepcopy
 from Data import Data
 from Solution import Solution
 from Generation import Generation
 import matplotlib.pyplot as plt
 import random
+import csv
 
 solutions: [Solution] = []
 
@@ -20,6 +20,8 @@ def plot(sols: [Solution], it):
     plt.ylabel("Distance")
     plt.xlabel("Risque")
     plt.title("Solution " + str(it))
+    plt.xlim(30, 140)
+    plt.ylim(40, 150)
     plt.scatter(risks, distances)
     plt.show()
 
@@ -48,31 +50,29 @@ def generateSolution():
 
 
 def algo(nbSolInit: int, nbIterations: int):
-    """"
-    1- création premieres solutions
-    2- boucle sur X itérations de : -selection()
-                                    -reproduce()
-                                    -mutate()
-    """
     global solutions
 
     for i in range(nbSolInit):  # on génère un premier échantillon de 20 solutions au hasard
         solutions.append(generateSolution())
         # print(solutions[i].code) # debug
 
-    gen = Generation(solutions)
-
     gen_list = []
     for i in range(nbIterations):
-        gen_list.append(gen)
+        gen = Generation(solutions)
+
         gen.selection()
-        gen = gen.reproduce()
+        gen.reproduce()
         gen.mutate()  # Mutation à faire dans la reproduction
-        print(len(gen_list))
+
+        solutions = gen.getSolutions()
+        gen_list.append(gen)
+        print(str(round((len(gen_list) / nbIterations) * 100, 2)) + '%')
+        # print(len(gen.getSolutions()))
     plot(gen_list[0].getSolutions(), "start")
     plot(gen_list[-1].getSolutions(), "end")
     plot(getParetoFrontier(gen), "pareto")
     # plot(gen.getSolutions())
+    export(gen.getSolutions())
 
 
 def getParetoFrontier(gen: Generation):
@@ -83,13 +83,16 @@ def getParetoFrontier(gen: Generation):
     return optiSols
 
 
+def export(sols: [Solution]):
+    with open('solutions.csv', 'w', encoding='UTF8', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Distance', 'Risque', 'Solution'])
+        for solution in sols:
+            writer.writerow([solution.getTotalDistance(), solution.getTotalRisk(), solution.getCode()])
+
+
 def main():
-    data = Data()
-    algo(nbSolInit=1000, nbIterations=10)
-    # print(len(solutions))
-    # plot(solutions)
-    # for solution in solutions:
-    #    print(solution)
+    algo(nbSolInit=100, nbIterations=100)
 
 
 if __name__ == "__main__":
