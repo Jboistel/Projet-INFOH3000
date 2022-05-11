@@ -5,6 +5,8 @@ from Generation import Generation
 import matplotlib.pyplot as plt
 import random
 
+from src.Town import Town
+
 solutions: [Solution] = []
 
 global code
@@ -59,12 +61,12 @@ def algo(nbSolInit: int, nbIterations: int):
     gen = Generation(solutions)
 
     gen_list = []
+    gen_list.append(gen)
     for i in range(nbIterations):
-        gen_list.append(gen)
-        gen.selection()
         gen = gen.reproduce()
         gen.mutate()  # Mutation à faire dans la reproduction
         print(len(gen_list))
+        gen_list.append(gen)
     plot(gen_list[0].getSolutions(), "start")
     plot(gen_list[-1].getSolutions(), "end")
     plot(getParetoFrontier(gen), "pareto")
@@ -81,11 +83,13 @@ def getParetoFrontier(gen: Generation):
 
 def main():
     data = Data()
-    algo(nbSolInit=1000, nbIterations=10)
+    algo(nbSolInit=100, nbIterations=100)
     # print(len(solutions))
     # plot(solutions)
     # for solution in solutions:
     #    print(solution)
+
+
 
 
 if __name__ == "__main__":
