@@ -41,10 +41,6 @@ def generateSolution():
         return sol
     else:
         return
-    """if not sol.checkValidity():
-        generateSolution()
-    else:
-        return sol"""
 
 
 def algo(nbSolInit: int, nbIterations: int):

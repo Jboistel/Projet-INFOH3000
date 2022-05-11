@@ -1,3 +1,6 @@
+import random
+from math import floor
+
 from Data import Data
 from Town import Town
 from copy import deepcopy
@@ -25,13 +28,15 @@ class Solution:
         self.totalDist = 0
         for truck in self.trucks:
             self.totalDist += truck.getDistance() / 200
+        self.totalDist = round(self.totalDist, 3)
         return self.totalDist
 
     def getTotalDistance(self) -> float:
         return self.totalDist
 
     def calculateRisk(self) -> int:
-        self.totalRisk = (self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / (100000 * 300)
+        self.totalRisk = round((self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / (
+                100000 * 300), 3)
         return self.totalRisk
 
     def getTotalRisk(self) -> float:
@@ -41,7 +46,7 @@ class Solution:
     La methode donne plusieurs poids au risque et à la distance totale et renvoie le score minimal
     """
 
-    def calculateScore(self, weights=None) -> int:  #
+    def calculateScore(self, weights=None) -> int:
         if weights is None:
             weights = [0.3, 0.5, 0.7]
         scores = []
@@ -61,14 +66,16 @@ class Solution:
                     towns.append(town)
         return False
 
-    def checkValidity(self) -> bool:  # TODO
+    def checkValidity(self) -> bool:
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
-            if (((1 in truckRouteIds) and (4 in truckRouteIds)) #vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
+            if (((1 in truckRouteIds) and (
+                    4 in truckRouteIds))  # vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
                     or ((1 in truckRouteIds) and (15 in truckRouteIds))
                     or ((4 in truckRouteIds) and (15 in truckRouteIds))):
                 return False
-            if truck.getAmount() > sum(self.data.getNbPeople())/2: #vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
+            if truck.getAmount() > sum(
+                    self.data.getNbPeople()) / 2:  # vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
                 return False
 
         return True
@@ -105,3 +112,63 @@ class Solution:
 
     def getCode(self):
         return self.code
+
+
+def testDecode(solution: Solution):
+    dest = []
+    expected = [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    for truck in solution.trucks:
+        assert truck.getRouteIds()[0] == 0
+        assert truck.getRouteIds()[-1] == 0
+        for townId in truck.getRouteIds():
+            dest.append(townId)
+    dest.sort()
+    for i in range(len(dest)):
+        assert expected[i] == dest[i]
+    print("Decode test passed")
+
+
+def testCheckValidityAndDuplicates():
+    goodCode = [1, 2, 3, 5, 6, 0, 4, 7, 8, 9, 10, 11, 0, 12, 13, 14, 15, 16, 17, 18, 19]
+    solution = Solution(goodCode)
+    assert solution.checkValidity()
+    badCode1 = [1, 4, 15, 0, 2, 3, 5, 6, 7, 8, 9, 10, 0, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    solution = Solution(badCode1)
+    assert not solution.checkValidity()
+    badCode2 = [1, 0, 4, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    solution = Solution(badCode2)
+    assert not solution.checkValidity()
+    badCode3 = [1, 1, 0, 1, 0, 2, 2]
+    solution = Solution(badCode3)
+    assert not solution.checkDuplicates()
+    print("Check Validity test passed")
+
+
+def testComputeDistanceRiskAndScores():
+    baseCode = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
+    random.shuffle(baseCode)
+    codeCpy = deepcopy(baseCode)
+    sol = Solution(codeCpy)
+    expectedDist = sol.trucks[0].getDistance() + sol.trucks[1].getDistance() + sol.trucks[2].getDistance()
+    expectedDist /= 200
+    expectedDist = round(expectedDist, 3)
+    assert sol.calculateDistance() == expectedDist
+    expectedRisk = sol.trucks[0].getRisk() + sol.trucks[1].getRisk() + sol.trucks[2].getRisk()
+    expectedRisk /= 30000000
+    expectedRisk = round(expectedRisk, 3)
+    assert sol.calculateRisk() == expectedRisk
+    expectedScore = min(expectedRisk * 0.3 + expectedDist * (1 - 0.3),
+                        expectedRisk * 0.5 + expectedDist * (1 - 0.5),
+                        expectedRisk * 0.7 + expectedDist * (1 - 0.7))
+    assert sol.calculateScore([0.3, 0.5, 0.7]) == expectedScore
+    print("Computing Distance and Risk test passed")
+
+
+if __name__ == "__main__":
+    baseCode = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
+    random.shuffle(baseCode)
+    codeCpy = deepcopy(baseCode)
+    sol = Solution(codeCpy)
+    testDecode(sol)
+    testCheckValidityAndDuplicates()
+    testComputeDistanceRiskAndScores()
