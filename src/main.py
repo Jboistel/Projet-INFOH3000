@@ -1,11 +1,10 @@
-from copy import deepcopy
 from Data import Data
-from Solution import Solution
+from Solution import *
 from Generation import Generation
 import matplotlib.pyplot as plt
 import random
 
-from src.Town import Town
+
 
 solutions: [Solution] = []
 
@@ -25,6 +24,10 @@ def plot(sols: [Solution], it):
     plt.scatter(risks, distances)
     plt.show()
 
+def plotThis(sols, symbol):
+    distances = [solution.getTotalDistance() for solution in sols]
+    risques = [solution.getTotalRisk() for solution in sols]
+    plt.scatter(risques, distances, marker=symbol)
 
 def generateSolution():
     # codeCopy = deepcopy(code)
@@ -65,11 +68,17 @@ def algo(nbSolInit: int, nbIterations: int):
     for i in range(nbIterations):
         gen = gen.reproduce()
         gen.mutate()  # Mutation à faire dans la reproduction
-        print(len(gen_list))
-        gen_list.append(gen)
-    plot(gen_list[0].getSolutions(), "start")
+        print(i)
+    gen_list.append(gen)
+    """plot(gen_list[0].getSolutions(), "start")
     plot(gen_list[-1].getSolutions(), "end")
-    plot(getParetoFrontier(gen), "pareto")
+    plot(getParetoFrontier(gen), "pareto")"""
+    plt.ylabel("Distance")
+    plt.xlabel("Risque")
+    plotThis(gen_list[0].getSolutions(), "^")
+    plotThis(gen_list[-1].getSolutions(), "v")
+    plotThis(getParetoFrontier(gen), ".")
+    plt.show()
     # plot(gen.getSolutions())
 
 
@@ -84,11 +93,6 @@ def getParetoFrontier(gen: Generation):
 def main():
     data = Data()
     algo(nbSolInit=100, nbIterations=100)
-    # print(len(solutions))
-    # plot(solutions)
-    # for solution in solutions:
-    #    print(solution)
-
 
 
 

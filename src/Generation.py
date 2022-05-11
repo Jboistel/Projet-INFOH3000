@@ -58,7 +58,7 @@ class Generation:
     def mutate(self):
         for i, solution in enumerate(self.solutions):
             route = solution.getCode()
-            if random.randint(0, 10) == 1:  # 10% de proba de mutation
+            if random.randint(0, 100) == 1:  # 100% de proba de mutation
                 swapIndexA = random.randint(1, 19)
                 swapIndexB = random.randint(1, 19)
                 route[swapIndexA], route[swapIndexB] = route[swapIndexB], route[

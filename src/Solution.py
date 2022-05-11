@@ -7,6 +7,7 @@ from copy import deepcopy
 
 from Truck import Truck
 
+global lowWeight, midWeight, highWeight
 
 class Solution:
     trucks: [Truck] = []
@@ -36,7 +37,7 @@ class Solution:
 
     def calculateRisk(self) -> int:
         self.totalRisk = round((self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / (
-                100000 * 300), 3)
+                100000 * 500), 3)
         return self.totalRisk
 
     def getTotalRisk(self) -> float:
@@ -48,12 +49,14 @@ class Solution:
 
     def calculateScore(self, weights=None) -> int:
         if weights is None:
-            weights = [0.3, 0.5, 0.7]
-        scores = []
+            weights = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.5, 0.7, 0.8, 0.9, 1]
+        """scores = []
         for value in weights:
             scores.append(
                 self.totalRisk * value + self.totalDist * (1 - value))  # TODO: Attention aux ordres de grandeur
-        self.score = min(scores)
+        self.score = min(scores)"""
+        for value in weights:
+            self.score += self.totalDist * value + self.totalDist * (1 - value)
         return self.score
 
     def checkDuplicates(self) -> bool:  # La première et la dernière risquent d'être la banque
@@ -112,6 +115,26 @@ class Solution:
 
     def getCode(self):
         return self.code
+
+
+def counter3():
+    try:
+        counter3.counter += 1
+    except AttributeError:
+        counter3.counter = 0
+
+def counter5():
+    try:
+        counter5.counter += 1
+    except AttributeError:
+        counter5.counter = 0
+
+def counter7():
+    try:
+        counter7.counter += 1
+    except AttributeError:
+        counter7.counter = 0
+
 
 
 def testDecode(solution: Solution):
