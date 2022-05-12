@@ -7,11 +7,8 @@ import csv
 
 solutions: [Solution] = []
 
-global code
-code = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
 
-
-def plot(sols: [Solution], it):
+def plot(sols: [Solution], title, baseNb, iteNb):
     distances: [float] = []
     risks: [float] = []
     for solution in sols:
@@ -19,9 +16,9 @@ def plot(sols: [Solution], it):
         risks.append(solution.getTotalRisk())
     plt.ylabel("Distance")
     plt.xlabel("Risque")
-    plt.title("Solution " + str(it))
-    plt.xlim(30, 140)
-    plt.ylim(40, 150)
+    plt.title("Solution " + str(title)+ " - nbSolInit: " + str(baseNb) + " - nbIterations: " + str(iteNb))
+    plt.xlim(20, 150)
+    plt.ylim(50, 70)
     plt.scatter(risks, distances)
     plt.show()
 
@@ -68,9 +65,9 @@ def algo(nbSolInit: int, nbIterations: int):
         gen_list.append(gen)
         print(str(round((len(gen_list) / nbIterations) * 100, 2)) + '%')
         # print(len(gen.getSolutions()))
-    plot(gen_list[0].getSolutions(), "start")
-    plot(gen_list[-1].getSolutions(), "end")
-    plot(getParetoFrontier(gen), "pareto")
+    #plot(gen_list[0].getSolutions(), "start", nbSolInit, nbIterations)
+    #plot(gen_list[-1].getSolutions(), "end", nbSolInit, nbIterations)
+    plot(getParetoFrontier(gen), "pareto", nbSolInit, nbIterations)
     # plot(gen.getSolutions())
     export(gen.getSolutions())
 
