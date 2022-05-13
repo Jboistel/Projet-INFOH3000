@@ -50,13 +50,13 @@ class Solution:
     def calculateScore(self, weights=None) -> int:
         if weights is None:
             weights = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-        """scores = []
+        scores = []
         for value in weights:
             scores.append(
                 self.totalRisk * value + self.totalDist * (1 - value))  # TODO: Attention aux ordres de grandeur
-        self.score = min(scores)"""
-        for value in weights:
-            self.score += self.totalDist * value + self.totalDist * (1 - value)
+        self.score = min(scores)
+        """for value in weights:
+            self.score += self.totalDist * value + self.totalDist * (1 - value)"""
         return self.score
 
     def checkDuplicates(self) -> bool:  # La première et la dernière risquent d'être la banque
@@ -72,13 +72,11 @@ class Solution:
     def checkValidity(self) -> bool:
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
-            if (((1 in truckRouteIds) and (
-                    4 in truckRouteIds))  # vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
-                    or ((1 in truckRouteIds) and (15 in truckRouteIds))
-                    or ((4 in truckRouteIds) and (15 in truckRouteIds))):
+            if (1 in truckRouteIds) and (
+                    4 in truckRouteIds) and (15 in truckRouteIds):  # vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
                 return False
             if truck.getAmount() > sum(
-                    self.data.getNbPeople()) / 2:  # vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
+                    self.data.getNbPeople()) * 0.7 / 2:  # vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
                 return False
 
         return True

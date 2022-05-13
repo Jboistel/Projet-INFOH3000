@@ -76,20 +76,28 @@ def algo(nbSolInit: int, nbIterations: int):
     """plot(gen_list[0].getSolutions(), "start")
     plot(gen_list[-1].getSolutions(), "end")
     plot(getParetoFrontier(gen), "pareto")"""
+    pareto = getParetoFrontier(gen)
+    for sol in pareto:
+        print(sol.score)
     plt.ylabel("Distance")
     plt.xlabel("Risque")
     plotThis(gen_list[0].getSolutions(), "^")
     plotThis(gen_list[-1].getSolutions(), "v")
-    plotThis(getParetoFrontier(gen), ".")
+    plotThis(pareto, ".")
+    plt.show()
+    plt.ylabel("Distance")
+    plt.xlabel("Risque")
+    plotThis(pareto, ".")
     plt.show()
     # plot(gen.getSolutions())
-    export(gen.getSolutions())
+    if input("Voulez-vous sauvegarder? (Y:N): ") == "Y":
+        export(pareto)
 
 
 def getParetoFrontier(gen: Generation):
     optiSols = []
     for solution in gen.getSolutions():
-        if (gen.isSolutionOptimal(solution)):
+        if gen.isSolutionOptimal(solution):
             optiSols.append(solution)
     return optiSols
 
@@ -103,7 +111,9 @@ def export(sols: [Solution]):
 
 
 def main():
-    algo(nbSolInit=100, nbIterations=100)
+    algo(nbSolInit=1000, nbIterations=10)
+
+
 
 
 if __name__ == "__main__":

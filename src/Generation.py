@@ -6,7 +6,7 @@ from Solution import *
 
 
 class Generation:
-    populationInitSize : int
+    populationInitSize: int
     solutions: [Solution] = []
     data = Data()
     distMatrix = data.getDistMatrix()
@@ -18,15 +18,21 @@ class Generation:
 
     # Source : https://github.com/ralthor/GeneticAlgorithm-TSP/blob/feature-multi-tsp/src/algorithm.js
     def reproduce(self):
+        forward = True
         newSolutions = []
         # self.elitismSelection()  # Goes with selectInElitePopulation
-        # newSolutions = self.steadyStateBasePopulation()  # Goes with steadyStateSelection
+        newSolutions = self.steadyStateBasePopulation()  # Goes with steadyStateSelection
         while len(newSolutions) < self.populationInitSize:
             # parents = self.selectInElitePopulation()  # Goes with elitismSelection
-            parents = self.rouletteWheelSelection()
-            # parents = self.steadyStateSelection(newSolutions)  # Goes with steadyStateBasePopulation
-            newSolutions.append(self.getChild(parents[0], parents[1], True))
-            newSolutions.append(self.getChild(parents[0], parents[1], False))
+            # parents = self.rouletteWheelSelection()
+            parents = self.steadyStateSelection(newSolutions)  # Goes with steadyStateBasePopulation
+            newSolution = self.getChild(parents[0], parents[1], forward)
+            if newSolution:
+                newSolutions.append(newSolution)
+            if forward:
+                forward = not forward
+            else:
+                forward = not forward
         return Generation(newSolutions)
 
     # Source : https://github.com/ralthor/GeneticAlgorithm-TSP/blob/feature-multi-tsp/src/algorithm.js
@@ -37,23 +43,31 @@ class Generation:
         else:
             increment = -1
             rotate = 0
-        newcode = []
-        px = deepcopy(x)
-        py = deepcopy(y)
-        pxCode = px.getCode()
-        pyCode = py.getCode()
-        current = pxCode[randint(0, len(pxCode) - 1)]  # Départ prit au hasard
-        newcode.append(current)
-        while len(pxCode) > 1:
-            dx = pxCode[-len(pxCode) * rotate + pxCode.index(current) + increment]  # Element suivant
-            dy = pyCode[-len(pyCode) * rotate + pyCode.index(current) + increment]
-            pxCode.pop(pxCode.index(current))
-            pyCode.pop(pyCode.index(current))
-            # On choisi la ville la plus proche parmis les deux solutions
-            # Encore besoin de faire une matrice des distance ou de trouver un équivalent
-            current = dx if self.distMatrix[current][dx] < self.distMatrix[current][dy] else dy
+        ret: Solution
+        tries = 0
+        while tries < 20:
+            tries += 1
+            newcode = []
+            px = deepcopy(x)
+            py = deepcopy(y)
+            pxCode = px.getCode()
+            pyCode = py.getCode()
+            current = pxCode[randint(0, len(pxCode) - 1)]  # Départ prit au hasard
             newcode.append(current)
-        return Solution(newcode)
+            while len(pxCode) > 1:
+                dx = pxCode[-len(pxCode) * rotate + pxCode.index(current) + increment]  # Element suivant
+                dy = pyCode[-len(pyCode) * rotate + pyCode.index(current) + increment]
+                pxCode.pop(pxCode.index(current))
+                pyCode.pop(pyCode.index(current))
+                # On choisi la ville la plus proche parmis les deux solutions
+                # Encore besoin de faire une matrice des distance ou de trouver un équivalent
+                current = dx if self.distMatrix[current][dx] < self.distMatrix[current][dy] and \
+                                self.distMatrix[current][dx] != 0 else dy
+                newcode.append(current)
+            ret = Solution(newcode)
+            if ret.checkValidity():
+                return ret
+        return
 
     def mutate(self):
         for i, solution in enumerate(self.solutions):
@@ -71,24 +85,23 @@ class Generation:
         self.solutions.sort(key=lambda s: s.calculateScore())
         self.solutions = self.solutions[:len(self.solutions) // 2]
 
-    def selectInElitePopulation(self): # Peut avoir une répétition
+    def selectInElitePopulation(self):  # Peut avoir une répétition
         return random.choices(self.solutions, k=2)
 
     def rouletteWheelSelection(self):
-        cumulatedScore = sum([solution.score for solution in self.solutions])  # Used to have a weight proportionate to how low the score of a solution is
-        return random.choices(self.solutions, weights=[1/solution.score for solution in self.solutions], k=2)
+        return random.choices(self.solutions, weights=[1 / solution.score for solution in self.solutions], k=2)
 
     def steadyStateBasePopulation(self):
         self.solutions.sort(key=lambda s: s.calculateScore())
-        return self.solutions[:len(self.solutions)//2]
+        return self.solutions[:len(self.solutions) // 2]
 
     def steadyStateSelection(self, population):
         return random.choices(population, k=2)
 
     def isSolutionOptimal(self, optiSol: Solution):
         for solution in self.solutions:
-            if (solution.getTotalDistance() < optiSol.getTotalDistance()
-                    and solution.getTotalRisk() < optiSol.getTotalRisk()):
+            if solution != optiSol and (solution.getTotalDistance() <= optiSol.getTotalDistance()
+                                        and solution.getTotalRisk() <= optiSol.getTotalRisk()):
                 return False
         return True
 
@@ -142,6 +155,7 @@ if __name__ == "__main__":
         children2.append(gen.getChild(0, 1, False))
 
     import matplotlib.pyplot as plt
+
     distancesParents = [i.totalDist for i in gen.getSolutions()]
     risquesParents = [i.totalRisk for i in gen.getSolutions()]
     distancesEnfants = [i.totalDist for i in children]
@@ -155,4 +169,3 @@ if __name__ == "__main__":
     plt.scatter(risquesEnfants, distancesEnfants, marker="v")
     plt.scatter(risquesEnfants2, distancesEnfants2, marker="^")
     plt.show()
-
