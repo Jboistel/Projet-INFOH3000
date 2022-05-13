@@ -49,7 +49,7 @@ class Solution:
 
     def calculateScore(self, weights=None) -> int:
         if weights is None:
-            weights = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.5, 0.7, 0.8, 0.9, 1]
+            weights = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
         """scores = []
         for value in weights:
             scores.append(
@@ -115,26 +115,6 @@ class Solution:
 
     def getCode(self):
         return self.code
-
-
-def counter3():
-    try:
-        counter3.counter += 1
-    except AttributeError:
-        counter3.counter = 0
-
-def counter5():
-    try:
-        counter5.counter += 1
-    except AttributeError:
-        counter5.counter = 0
-
-def counter7():
-    try:
-        counter7.counter += 1
-    except AttributeError:
-        counter7.counter = 0
-
 
 
 def testDecode(solution: Solution):

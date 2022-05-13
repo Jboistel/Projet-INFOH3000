@@ -3,6 +3,7 @@ from Solution import *
 from Generation import Generation
 import matplotlib.pyplot as plt
 import random
+import csv
 
 
 
@@ -21,6 +22,8 @@ def plot(sols: [Solution], it):
     plt.ylabel("Distance")
     plt.xlabel("Risque")
     plt.title("Solution " + str(it))
+    plt.xlim(30, 140)
+    plt.ylim(40, 150)
     plt.scatter(risks, distances)
     plt.show()
 
@@ -80,6 +83,7 @@ def algo(nbSolInit: int, nbIterations: int):
     plotThis(getParetoFrontier(gen), ".")
     plt.show()
     # plot(gen.getSolutions())
+    export(gen.getSolutions())
 
 
 def getParetoFrontier(gen: Generation):
@@ -90,10 +94,16 @@ def getParetoFrontier(gen: Generation):
     return optiSols
 
 
-def main():
-    data = Data()
-    algo(nbSolInit=1000, nbIterations=10)
+def export(sols: [Solution]):
+    with open('solutions.csv', 'w', encoding='UTF8', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Distance', 'Risque', 'Solution'])
+        for solution in sols:
+            writer.writerow([solution.getTotalDistance(), solution.getTotalRisk(), solution.getCode()])
 
+
+def main():
+    algo(nbSolInit=100, nbIterations=100)
 
 
 if __name__ == "__main__":
