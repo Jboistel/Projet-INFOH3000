@@ -58,9 +58,9 @@ class Generation:
     def mutate(self):
         for i, solution in enumerate(self.solutions):
             route = solution.getCode()
-            if random.randint(0, 100) == 1:  # 100% de proba de mutation
-                swapIndexA = random.randint(1, 19)
-                swapIndexB = random.randint(1, 19)
+            if random.randint(0, 100) == 1:  # 1% de proba de mutation
+                swapIndexA = random.randint(0, 20)
+                swapIndexB = random.randint(0, 20)
                 route[swapIndexA], route[swapIndexB] = route[swapIndexB], route[
                     swapIndexA]  # inversion de 2 elem au hasard
                 newSol = Solution(route)
@@ -71,12 +71,12 @@ class Generation:
         self.solutions.sort(key=lambda s: s.calculateScore())
         self.solutions = self.solutions[:len(self.solutions) // 2]
 
-    def selectInElitePopulation(self):
+    def selectInElitePopulation(self): # Peut avoir une répétition
         return random.choices(self.solutions, k=2)
 
     def rouletteWheelSelection(self):
         cumulatedScore = sum([solution.score for solution in self.solutions])  # Used to have a weight proportionate to how low the score of a solution is
-        return random.choices(self.solutions, weights=[cumulatedScore - solution.score for solution in self.solutions], k=2)
+        return random.choices(self.solutions, weights=[1/solution.score for solution in self.solutions], k=2)
 
     def steadyStateBasePopulation(self):
         self.solutions.sort(key=lambda s: s.calculateScore())

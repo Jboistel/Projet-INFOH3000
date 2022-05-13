@@ -92,7 +92,7 @@ def getParetoFrontier(gen: Generation):
 
 def main():
     data = Data()
-    algo(nbSolInit=100, nbIterations=100)
+    algo(nbSolInit=1000, nbIterations=10)
 
 
 
