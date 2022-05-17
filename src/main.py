@@ -32,6 +32,12 @@ def plotThis(sols, symbol):
     risques = [solution.getTotalRisk() for solution in sols]
     plt.scatter(risques, distances, marker=symbol)
 
+def plotFront(solutionsOnFront: [Solution]):
+    risks = [sol.totalRisk for sol in solutionsOnFront]
+    dists = [sol.totalDist for sol in solutionsOnFront]
+    plt.plot(risks, dists)
+
+
 def generateSolution():
     # codeCopy = deepcopy(code)
     codeCopy = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
@@ -88,6 +94,8 @@ def algo(nbSolInit: int, nbIterations: int):
     plt.ylabel("Distance")
     plt.xlabel("Risque")
     plotThis(pareto, ".")
+    pareto.sort(key=lambda s: s.totalRisk)
+    plotFront(pareto)
     plt.show()
     # plot(gen.getSolutions())
     if input("Voulez-vous sauvegarder? (Y:N): ") == "Y":
