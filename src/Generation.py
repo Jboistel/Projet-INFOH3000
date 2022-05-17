@@ -100,8 +100,8 @@ class Generation:
 
     def isSolutionOptimal(self, optiSol: Solution):
         for solution in self.solutions:
-            if solution != optiSol and (solution.getTotalDistance() <= optiSol.getTotalDistance()
-                                        and solution.getTotalRisk() <= optiSol.getTotalRisk()):
+            if solution != optiSol and (solution.getTotalDistance() < optiSol.getTotalDistance()
+                                        and solution.getTotalRisk() < optiSol.getTotalRisk()):
                 return False
         return True
 

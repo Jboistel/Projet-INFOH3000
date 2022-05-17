@@ -28,7 +28,7 @@ class Solution:
     def calculateDistance(self) -> float:
         self.totalDist = 0
         for truck in self.trucks:
-            self.totalDist += truck.getDistance() / 200
+            self.totalDist += truck.getDistance()
         self.totalDist = round(self.totalDist, 3)
         return self.totalDist
 
@@ -36,8 +36,7 @@ class Solution:
         return self.totalDist
 
     def calculateRisk(self) -> int:
-        self.totalRisk = round((self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()) / (
-                100000 * 500), 3)
+        self.totalRisk = round((self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()), 3)
         return self.totalRisk
 
     def getTotalRisk(self) -> float:
@@ -51,9 +50,11 @@ class Solution:
         if weights is None:
             weights = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
         scores = []
+        normalised_risk = self.totalRisk / 50000000
+        normalised_dist = self.totalDist / 200
         for value in weights:
             scores.append(
-                self.totalRisk * value + self.totalDist * (1 - value))  # TODO: Attention aux ordres de grandeur
+                normalised_risk * value + normalised_dist * (1 - value))
         self.score = min(scores)
         """for value in weights:
             self.score += self.totalDist * value + self.totalDist * (1 - value)"""
