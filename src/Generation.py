@@ -28,11 +28,10 @@ class Generation:
             parents = self.steadyStateSelection(newSolutions)  # Goes with steadyStateBasePopulation
             newSolution = self.getChild(parents[0], parents[1], forward)
             if newSolution:
-                newSolutions.append(newSolution)
-            if forward:
-                forward = not forward
-            else:
-                forward = not forward
+                if not (newSolution.totalRisk in [s.totalRisk for s in newSolutions] and
+                        newSolution.totalDist in [s.totalDist for s in newSolutions]):
+                    newSolutions.append(newSolution)
+            forward = not forward
         return Generation(newSolutions)
 
     # Source : https://github.com/ralthor/GeneticAlgorithm-TSP/blob/feature-multi-tsp/src/algorithm.js
