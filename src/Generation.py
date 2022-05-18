@@ -28,9 +28,8 @@ class Generation:
             parents = self.steadyStateSelection(newSolutions)  # Goes with steadyStateBasePopulation
             newSolution = self.getChild(parents[0], parents[1], forward)
             if newSolution:
-                if not (newSolution.totalRisk in [s.totalRisk for s in newSolutions] and
-                        newSolution.totalDist in [s.totalDist for s in newSolutions]):
-                    newSolutions.append(newSolution)
+                # if not [newSolution.totalRisk, newSolution.totalDist] in [[s.totalRisk, s.totalDist] for s in newSolutions]:
+                newSolutions.append(newSolution)
             forward = not forward
         return Generation(newSolutions)
 
