@@ -4,8 +4,7 @@ from Generation import Generation
 import matplotlib.pyplot as plt
 import random
 import csv
-
-
+import time
 
 solutions: [Solution] = []
 
@@ -27,10 +26,12 @@ def plot(sols: [Solution], it):
     plt.scatter(risks, distances)
     plt.show()
 
+
 def plotThis(sols, symbol):
     distances = [solution.getTotalDistance() for solution in sols]
     risques = [solution.getTotalRisk() for solution in sols]
     plt.scatter(risques, distances, marker=symbol)
+
 
 def plotFront(solutionsOnFront: [Solution]):
     risks = [sol.totalRisk for sol in solutionsOnFront]
@@ -77,18 +78,18 @@ def algo(nbSolInit: int, nbIterations: int):
     for i in range(nbIterations):
         gen = gen.reproduce()
         gen.mutate()  # Mutation à faire dans la reproduction
-        print(i)
+        print(str(round(i / nbIterations * 100, 2)) + "%")
     gen_list.append(gen)
     """plot(gen_list[0].getSolutions(), "start")
     plot(gen_list[-1].getSolutions(), "end")
     plot(getParetoFrontier(gen), "pareto")"""
     pareto = getParetoFrontier(gen)
-    for sol in pareto:
-        print(sol.score)
     plt.ylabel("Distance")
     plt.xlabel("Risque")
     plotThis(gen_list[0].getSolutions(), "^")
+    # print(len(gen_list[0].getSolutions()))
     plotThis(gen_list[-1].getSolutions(), "v")
+    # print(len(gen_list[-1].getSolutions()))
     plotThis(pareto, ".")
     plt.show()
     plt.ylabel("Distance")
@@ -97,9 +98,8 @@ def algo(nbSolInit: int, nbIterations: int):
     pareto.sort(key=lambda s: s.totalRisk)
     plotFront(pareto)
     plt.show()
-    # plot(gen.getSolutions())
-    if input("Voulez-vous sauvegarder? (Y:N): ") == "Y":
-        export(pareto)
+    export('solutions.csv', gen.getSolutions())
+    export('solutionsPareto.csv', pareto)
 
 
 def getParetoFrontier(gen: Generation):
@@ -110,8 +110,8 @@ def getParetoFrontier(gen: Generation):
     return optiSols
 
 
-def export(sols: [Solution]):
-    with open('solutions.csv', 'w', encoding='UTF8', newline='') as file:
+def export(file, sols: [Solution]):
+    with open(file, 'w', encoding='UTF8', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Distance', 'Risque', 'Solution'])
         for solution in sols:
@@ -119,9 +119,10 @@ def export(sols: [Solution]):
 
 
 def main():
-    algo(nbSolInit=1000, nbIterations=10)
-
-
+    tic = time.perf_counter()
+    algo(nbSolInit=100, nbIterations=1000)
+    toc = time.perf_counter()
+    print(f"Algo in {toc - tic:0.4f} seconds")
 
 
 if __name__ == "__main__":

@@ -20,10 +20,10 @@ class Generation:
     def reproduce(self):
         forward = True
         newSolutions = []
-        # self.elitismSelection()  # Goes with selectInElitePopulation
+        # newSolutions = self.elitismSelection()  # Goes with selectInElitePopulation
         newSolutions = self.steadyStateBasePopulation()  # Goes with steadyStateSelection
         while len(newSolutions) < self.populationInitSize:
-            # parents = self.selectInElitePopulation()  # Goes with elitismSelection
+            # parents = self.selectInElitePopulation(newSolutions)  # Goes with elitismSelection
             # parents = self.rouletteWheelSelection()
             parents = self.steadyStateSelection(newSolutions)  # Goes with steadyStateBasePopulation
             newSolution = self.getChild(parents[0], parents[1], forward)
@@ -83,10 +83,11 @@ class Generation:
 
     def elitismSelection(self):
         self.solutions.sort(key=lambda s: s.calculateScore())
-        self.solutions = self.solutions[:len(self.solutions) // 2]
+        newSolutions = self.solutions[:len(self.solutions) // 2]
+        return newSolutions
 
-    def selectInElitePopulation(self):  # Peut avoir une répétition
-        return random.choices(self.solutions, k=2)
+    def selectInElitePopulation(self, newSolutions):  # Peut avoir une répétition
+        return random.choices(newSolutions, k=2)
 
     def rouletteWheelSelection(self):
         return random.choices(self.solutions, weights=[1 / solution.score for solution in self.solutions], k=2)
@@ -134,6 +135,17 @@ def testSelection(gen):
 
 
 if __name__ == "__main__":
+    sol1 = Solution([5, 18, 19, 2, 17, 16, 7, 13, 9, 0, 14, 15, 6, 0, 10, 8, 3, 1, 11, 12, 4])
+    sol2 = Solution([10, 8, 3, 1, 11, 12, 4, 0, 14, 15, 6, 0, 5, 18, 19, 2, 17, 16, 7, 13, 9])
+    sol3 = Solution([17, 10, 19, 18, 6, 15, 0, 0, 11, 2, 8, 3, 1, 9, 4, 14, 5, 7, 16, 13, 12])
+    sol4 = Solution([3, 2, 19, 12, 1, 15, 14, 0, 6, 0, 13, 17, 11, 18, 4, 10, 5, 7, 16, 8, 9])
+
+    print("Dist : " + str(sol1.calculateDistance()) + " Risk : " + str(sol1.calculateRisk()))
+    print("Dist : " + str(sol2.calculateDistance()) + " Risk : " + str(sol2.calculateRisk()))
+    print("Dist : " + str(sol3.calculateDistance()) + " Risk : " + str(sol3.calculateRisk()))
+    print("Dist : " + str(sol4.calculateDistance()) + " Risk : " + str(sol4.calculateRisk()))
+
+    """
     testOptimalSolutionAndSelection()
 
     baseCode = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
@@ -169,3 +181,4 @@ if __name__ == "__main__":
     plt.scatter(risquesEnfants, distancesEnfants, marker="v")
     plt.scatter(risquesEnfants2, distancesEnfants2, marker="^")
     plt.show()
+    """
