@@ -8,10 +8,12 @@ class Town:
     id: int
     distancesToOthers = {}
     data: Data
+    position: (int, int)
 
     def __init__(self, id: int):
         self.id = id
         self.data = Data()
+        self.position = self.data.positions[id]
         self.population = self.data.getTownPop(id)
         self.name = self.data.getTownName(id)
 
