@@ -1,5 +1,6 @@
 from Solution import *
 
+
 def lineToInfoConverter(line):
     ret = line.strip("\n").split(",", 2)
     ret[0] = float(ret[0])
@@ -10,7 +11,7 @@ def lineToInfoConverter(line):
 
 
 if __name__ == "__main__":
-    with open("solutions.csv") as file:
+    with open("src/solutions.csv") as file:
         print(file.readline())
         for line in file:
             info = lineToInfoConverter(line)
@@ -19,4 +20,3 @@ if __name__ == "__main__":
                 print("Solution mal calculée: " + str(info[2]))
                 print(str(info[0]) + " != " + str(sol.totalDist))
                 print(str(info[1]) + " != " + str(sol.totalRisk))
-

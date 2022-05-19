@@ -17,7 +17,7 @@ def grapheSolution(s: Solution, number: int):
 
 
 if __name__ == "__main__":
-    with open("solutionsPareto.csv") as file:
+    with open("src/solutionsPareto.csv") as file:
         file.readline()
         for i, line in enumerate(file):
             info = lineToInfoConverter(line)

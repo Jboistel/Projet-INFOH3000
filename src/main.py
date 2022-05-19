@@ -104,9 +104,13 @@ def algo(nbSolInit: int, nbIterations: int):
 
 def getParetoFrontier(gen: Generation):
     optiSols = []
-    for solution in gen.getSolutions():
-        if gen.isSolutionOptimal(solution):
-            optiSols.append(solution)
+    for sol1 in gen.getSolutions():
+        if len(optiSols) == 0:
+            optiSols.append(sol1)
+            pass
+        for optiSol in optiSols:
+            if not gen.areSolutionsEquivalent(sol1, optiSol) and gen.isSolutionOptimal(sol1):
+                optiSols.append(sol1)
     return optiSols
 
 
@@ -120,7 +124,7 @@ def export(file, sols: [Solution]):
 
 def main():
     tic = time.perf_counter()
-    algo(nbSolInit=100, nbIterations=1000)
+    algo(nbSolInit=10, nbIterations=100)
     toc = time.perf_counter()
     print(f"Algo in {toc - tic:0.4f} seconds")
 
