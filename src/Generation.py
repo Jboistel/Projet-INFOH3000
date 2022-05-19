@@ -20,12 +20,12 @@ class Generation:
     def reproduce(self):
         forward = True
         newSolutions = []
-        # newSolutions = self.elitismSelection()  # Goes with selectInElitePopulation
-        newSolutions = self.steadyStateBasePopulation()  # Goes with steadyStateSelection
+        newSolutions = self.elitismSelection()  # Goes with selectInElitePopulation
+        # newSolutions = self.steadyStateBasePopulation()  # Goes with steadyStateSelection
         while len(newSolutions) < self.populationInitSize:
-            # parents = self.selectInElitePopulation(newSolutions)  # Goes with elitismSelection
+            parents = self.selectInElitePopulation(newSolutions)  # Goes with elitismSelection
             # parents = self.rouletteWheelSelection()
-            parents = self.steadyStateSelection(newSolutions)  # Goes with steadyStateBasePopulation
+            # parents = self.steadyStateSelection(newSolutions)  # Goes with steadyStateBasePopulation
             newSolution = self.getChild(parents[0], parents[1], forward)
             if newSolution:
                 # if not [newSolution.totalRisk, newSolution.totalDist] in [[s.totalRisk, s.totalDist] for s in newSolutions]:
@@ -102,8 +102,13 @@ class Generation:
 
     def isSolutionOptimal(self, optiSol: Solution):
         for solution in self.solutions:
-            if solution != optiSol and (solution.getTotalDistance() < optiSol.getTotalDistance()
-                                        and solution.getTotalRisk() < optiSol.getTotalRisk()):
+            solDist = solution.getTotalDistance()
+            optidist = optiSol.getTotalDistance()
+            solRisk = solution.getTotalRisk()
+            optiRisk = optiSol.getTotalRisk()
+            if solution != optiSol and ((solDist < optidist and solRisk < optiRisk)
+                                        or (solDist == optidist and solRisk < optiRisk)
+                                        or (solDist < optidist and solRisk == optiRisk)):
                 return False
         return True
 
@@ -136,8 +141,8 @@ def testSelection(gen):
 
 
 if __name__ == "__main__":
-    sol1 = Solution([1, 7, 16, 13, 9, 0, 5, 3, 8, 10, 11, 12, 4, 0, 17, 2, 19, 18, 6, 15, 14])
-    sol2 = Solution([17, 2, 19, 18, 6, 15, 14, 0, 1, 7, 16, 13, 9, 0, 5, 3, 8, 10, 11, 12, 4])
+    sol1 = Solution([17, 2, 19, 18, 6, 15, 14, 0, 5, 1, 7, 16, 13, 9, 0, 3, 8, 10, 11, 12, 4])
+    sol2 = Solution([5, 1, 7, 16, 13, 9, 0, 17, 2, 19, 18, 6, 15, 14, 0, 3, 8, 10, 11, 12, 4])
 
     print("Dist : " + str(sol1.calculateDistance()) + " Risk : " + str(sol1.calculateRisk()))
     print("Dist : " + str(sol2.calculateDistance()) + " Risk : " + str(sol2.calculateRisk()))
