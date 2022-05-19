@@ -4,18 +4,17 @@ from Town import Town
 class Truck:
     route: [Town]
     amount: int
+    totalAmount: int
 
     def __init__(self, route: [Town]):
         self.route = route
         self.amount = 0
+        self.calculateTotalAmount()
 
-    """
-    def getAmount(self) -> float:
-        self.amount = 0
+    def calculateTotalAmount(self) -> float:
+        self.totalAmount = 0
         for town in self.route:
-            self.amount += town.getCashAmount()
-        return self.amount
-    """
+            self.totalAmount += town.getCashAmount()
 
     def getRoute(self) -> [Town]:
         return self.route
@@ -31,6 +30,9 @@ class Truck:
 
     def getAmount(self) -> float:
         return self.amount
+
+    def getTotalAmount(self) -> float:
+        return self.totalAmount
 
     def increaseAmount(self, town: Town):
         self.amount += town.getCashAmount()

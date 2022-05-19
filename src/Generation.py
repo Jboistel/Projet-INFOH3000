@@ -69,15 +69,18 @@ class Generation:
 
     def mutate(self):
         for i, solution in enumerate(self.solutions):
-            route = solution.getCode()
             if random.randint(0, 100) == 1:  # 1% de proba de mutation
-                swapIndexA = random.randint(0, 20)
-                swapIndexB = random.randint(0, 20)
-                route[swapIndexA], route[swapIndexB] = route[swapIndexB], route[
-                    swapIndexA]  # inversion de 2 elem au hasard
-                newSol = Solution(route)
-                if newSol.checkValidity():
-                    self.solutions[i] = newSol
+                didNotMutate = True
+                while (didNotMutate):
+                    route = deepcopy(solution.getCode())
+                    swapIndexA = random.randint(0, 20)
+                    swapIndexB = random.randint(0, 20)
+                    route[swapIndexA], route[swapIndexB] = route[swapIndexB], route[swapIndexA]
+                    # inversion de 2 elem au hasard
+                    newSol = Solution(route)
+                    if newSol.checkValidity():
+                        self.solutions[i] = newSol
+                        didNotMutate = False
 
     def elitismSelection(self):
         self.solutions.sort(key=lambda s: s.calculateScore())
@@ -133,15 +136,11 @@ def testSelection(gen):
 
 
 if __name__ == "__main__":
-    sol1 = Solution([5, 18, 19, 2, 17, 16, 7, 13, 9, 0, 14, 15, 6, 0, 10, 8, 3, 1, 11, 12, 4])
-    sol2 = Solution([10, 8, 3, 1, 11, 12, 4, 0, 14, 15, 6, 0, 5, 18, 19, 2, 17, 16, 7, 13, 9])
-    sol3 = Solution([17, 10, 19, 18, 6, 15, 0, 0, 11, 2, 8, 3, 1, 9, 4, 14, 5, 7, 16, 13, 12])
-    sol4 = Solution([3, 2, 19, 12, 1, 15, 14, 0, 6, 0, 13, 17, 11, 18, 4, 10, 5, 7, 16, 8, 9])
+    sol1 = Solution([1, 7, 16, 13, 9, 0, 5, 3, 8, 10, 11, 12, 4, 0, 17, 2, 19, 18, 6, 15, 14])
+    sol2 = Solution([17, 2, 19, 18, 6, 15, 14, 0, 1, 7, 16, 13, 9, 0, 5, 3, 8, 10, 11, 12, 4])
 
     print("Dist : " + str(sol1.calculateDistance()) + " Risk : " + str(sol1.calculateRisk()))
     print("Dist : " + str(sol2.calculateDistance()) + " Risk : " + str(sol2.calculateRisk()))
-    print("Dist : " + str(sol3.calculateDistance()) + " Risk : " + str(sol3.calculateRisk()))
-    print("Dist : " + str(sol4.calculateDistance()) + " Risk : " + str(sol4.calculateRisk()))
 
     """
     testOptimalSolutionAndSelection()

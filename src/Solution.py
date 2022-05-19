@@ -9,6 +9,7 @@ from Truck import Truck
 
 global lowWeight, midWeight, highWeight
 
+
 class Solution:
     trucks: [Truck] = []
     totalDist: int = 0
@@ -73,10 +74,10 @@ class Solution:
     def checkValidity(self) -> bool:
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
-            if (1 in truckRouteIds) and (
-                    4 in truckRouteIds) and (15 in truckRouteIds):  # vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
+            if (1 in truckRouteIds) and (4 in truckRouteIds) and (15 in truckRouteIds):
+                # vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
                 return False
-            if truck.getAmount() > sum(
+            if truck.getTotalAmount() > sum(
                     self.data.getNbPeople()) * 0.7 / 2:  # vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
                 return False
 
