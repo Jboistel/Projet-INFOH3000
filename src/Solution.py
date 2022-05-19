@@ -12,15 +12,17 @@ global lowWeight, midWeight, highWeight
 
 class Solution:
     trucks: [Truck] = []
+    mutated = False
     totalDist: int = 0
     totalRisk: int = 0
     score: int = 0
     code: []  # somme des routes ?
     data = Data()
 
-    def __init__(self, code):
+    def __init__(self, code, mutated=False):
         self.code = code
         self.trucks = []
+        self.mutated = mutated
         self.decode(code)
         self.calculateRisk()
         self.calculateDistance()
