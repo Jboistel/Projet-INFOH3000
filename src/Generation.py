@@ -114,20 +114,18 @@ class Generation:
 
     def areSolutionsEquivalent(self, sol1: Solution, sol2: Solution) -> bool:
         if sol1 == sol2:
-            return False
+            return True
         routes1 = []
         routes2 = []
         for truck in sol1.trucks:
             routes1.append(truck.getRouteIds())
         for truck in sol2.trucks:
             routes2.append(truck.getRouteIds())
-        for r1 in routes1:
-            for r2 in routes2:
-                if (r1[0] == r2[0] or r1[0] == r2[1] or r1[0] == r2[2]) and (
-                        r1[1] == r2[0] or r1[1] == r2[1] or r1[1] == r2[2]):
-                    return True
-                else:
-                    return False
+
+        if (routes1[0] in routes2) and (routes1[1] in routes2) and (routes1[2] in routes2):
+            return True
+        else:
+            return False
 
     def getSolutions(self) -> [Solution]:
         return self.solutions

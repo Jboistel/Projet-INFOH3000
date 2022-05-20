@@ -105,12 +105,15 @@ def algo(nbSolInit: int, nbIterations: int):
 def getParetoFrontier(gen: Generation):
     optiSols = []
     for sol1 in gen.getSolutions():
+        isOpti = True
         if len(optiSols) == 0:
             optiSols.append(sol1)
             pass
         for optiSol in optiSols:
-            if not gen.areSolutionsEquivalent(sol1, optiSol) and gen.isSolutionOptimal(sol1):
-                optiSols.append(sol1)
+            if gen.areSolutionsEquivalent(sol1, optiSol):
+                isOpti = False
+        if isOpti and gen.isSolutionOptimal(sol1):
+            optiSols.append(sol1)
     return optiSols
 
 
