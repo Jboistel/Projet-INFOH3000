@@ -6,7 +6,7 @@ from CheckSolutions import lineToInfoConverter
 def grapheSolution(s: Solution, number: int):
     cols = ["yellow", "orange", "red"]
 
-    plt.title("Solution " + str(number) + "\nCode: " + str(s.getCode()))
+    plt.title("Solution " + str(number) + " Distance=" + str(s.totalDist) + ", Risque=" + str(s.totalRisk) + "\nCode: " + str(s.getCode()))
     for t, truck in enumerate(s.trucks):
         tournee = [(c.position[0], c.position[1]) for c in truck.route]
         for i in range(len(tournee) - 1):
