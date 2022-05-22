@@ -2,6 +2,11 @@ from Solution import *
 
 
 def lineToInfoConverter(line):
+    """
+    Convert a string line into an array of the infos
+    :param line: the line to convert
+    :return: the infos extracted
+    """
     ret = line.strip("\n").split(",", 2)
     ret[0] = float(ret[0])
     ret[1] = float(ret[1])

@@ -1,22 +1,20 @@
 import random
-from math import floor
-
 from Data import Data
 from Town import Town
 from copy import deepcopy
 
 from Truck import Truck
 
-global lowWeight, midWeight, highWeight
-
 
 class Solution:
+    """Represents a specific solution to the problem with the 3 trucks being the 3 salesmen. Each solution has its own
+    risk, distance, score and code, the code is the genome of the solution"""
     trucks: [Truck] = []
     mutated = False
     totalDist: int = 0
     totalRisk: int = 0
     score: int = 0
-    code: []  # somme des routes ?
+    code: []
     data = Data()
 
     def __init__(self, code, mutated=False):
@@ -29,6 +27,7 @@ class Solution:
         self.calculateScore()
 
     def calculateDistance(self) -> float:
+        """Returns the total distance traveled for this solution"""
         self.totalDist = 0
         for truck in self.trucks:
             self.totalDist += truck.getDistance()
@@ -39,17 +38,18 @@ class Solution:
         return self.totalDist
 
     def calculateRisk(self) -> int:
+        """Returns the total risk took for this solution"""
         self.totalRisk = round((self.trucks[0].getRisk() + self.trucks[1].getRisk() + self.trucks[2].getRisk()), 3)
         return self.totalRisk
 
     def getTotalRisk(self) -> float:
         return self.totalRisk
 
-    """
-    La methode donne plusieurs poids au risque et à la distance totale et renvoie le score minimal
-    """
-
     def calculateScore(self, weights=None) -> int:
+        """Computes the score of the solution by comparing several possible scores and keeping the best (lowest).
+        This gives a chance for solution with either high distance and low rick or low distance and high risk to carry
+        on their genome.
+        Risk and distance are normalized by their approximated order of magnitude"""
         if weights is None:
             weights = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
         scores = []
@@ -59,11 +59,10 @@ class Solution:
             scores.append(
                 normalised_risk * value + normalised_dist * (1 - value))
         self.score = min(scores)
-        """for value in weights:
-            self.score += self.totalDist * value + self.totalDist * (1 - value)"""
         return self.score
 
-    def checkDuplicates(self) -> bool:  # La première et la dernière risquent d'être la banque
+    def checkDuplicates(self) -> bool:
+        """Check if a solution has a duplication of town in its trucks route"""
         towns = []
         for truck in self.trucks:
             for town in truck.getRoute():
@@ -74,18 +73,20 @@ class Solution:
         return False
 
     def checkValidity(self) -> bool:
+        """Ckecks validity of a solution:
+        No truck should contain more that 50% of the total money
+        No truck should stop at the 3 most populated town (1, 4 and 15)"""
         for truck in self.trucks:
             truckRouteIds = truck.getRouteIds()
             if (1 in truckRouteIds) and (4 in truckRouteIds) and (15 in truckRouteIds):
-                # vérifie qu'un camion ne passe pas par 2 des 3 communes les plus peuplées
                 return False
             if truck.getTotalAmount() > sum(
-                    self.data.getNbPeople()) * 0.7 / 2:  # vérifie qu'un camion ne contienne pas plus de la moitié du montant total à collecter
+                    self.data.getNbPeople()) * 0.7 / 2:
                 return False
-
         return True
 
     def decode(self, code: [int]):
+        """Translates the code to 3 trucks for the solution"""
         codeCopy = deepcopy(code)
         for i in range(3):
             route = []
@@ -103,17 +104,6 @@ class Solution:
             else:
                 route = [Town(0), Town(0)]
             self.trucks.append(Truck(route))
-
-    """Peut etre utile pour le check validity ?
-    def decode(self, code: [int]):
-        c = deepcopy(code)
-        i = c.index(0)
-        a = c[:i]  # premier camion
-        c = c[i + 1:]
-        i = c.index(0)
-        b = c[:i]  # deuxieme camion
-        c = c[i + 1:]  # troisieme camion
-    """
 
     def getCode(self):
         return self.code
@@ -169,7 +159,7 @@ def testComputeDistanceRiskAndScores():
     print("Computing Distance and Risk test passed")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # Test for the class
     baseCode = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0]
     random.shuffle(baseCode)
     codeCpy = deepcopy(baseCode)

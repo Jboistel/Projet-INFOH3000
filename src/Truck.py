@@ -2,6 +2,9 @@ from Town import Town
 
 
 class Truck:
+    """Represents one travelling salesman in the solution to the problem,
+       It has a specific route, a 'real-time' amount of money transported for risk computation,
+       and the total amount transported"""
     route: [Town]
     amount: int
     totalAmount: int
@@ -11,7 +14,8 @@ class Truck:
         self.amount = 0
         self.calculateTotalAmount()
 
-    def calculateTotalAmount(self) -> float:
+    def calculateTotalAmount(self):
+        """Computes the total amount of money transported"""
         self.totalAmount = 0
         for town in self.route:
             self.totalAmount += town.getCashAmount()
@@ -23,6 +27,7 @@ class Truck:
         return [town.getId() for town in self.route]
 
     def getDistance(self) -> int:
+        """Computes and returns the total distance traveled by this truck"""
         result = 0
         for i in range(len(self.route) - 1):
             result += self.route[i].getDistanceToTown(self.route[i + 1])
@@ -38,6 +43,7 @@ class Truck:
         self.amount += town.getCashAmount()
 
     def getRisk(self) -> float:
+        """Computes the total risk took by this Truck"""
         amount = 0
         result = 0
         for i in range(len(self.route) - 1):
@@ -100,7 +106,7 @@ def testRisque():
     print("Risque test passed")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # Tests for this class
     testRoute()
     testAmount()
     testDistance()
